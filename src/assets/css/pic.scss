@@ -1,0 +1,31 @@
+@import "var";
+$basewidth:120px;
+$margin:20px;
+@mixin box($n:1,$height:auto){
+  width:$n * $basewidth + ($n - 1) * $margin ;
+  margin-right: $margin;
+  float: left;
+  height: $height;
+}
+#boxlist{
+  max-width: 720px;
+  height: 500px;
+  background: green;
+  @include box-sizing();
+  padding-left: 20px;
+  .box,.box1,.box2,.box3{
+    background: black;
+  }
+  .box{
+    @include box(1,50px);
+  }
+  .box1{
+    @include box(2,50px);
+  }
+  .box2{
+    @include box(3,50px);
+  }
+  .box3{
+    @include box(1,50px);
+  }
+}

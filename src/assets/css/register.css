@@ -1,0 +1,100 @@
+#registers {
+  min-width: 1190px;
+  width: 100%;
+  background: #F5F5F5;
+  padding: 20px 0px; }
+  #registers .register {
+    width: 1190px;
+    margin: 0 auto;
+    background: white;
+    overflow: hidden;
+    padding: 100px 0px 317px; }
+    #registers .register h1 {
+      width: 200px;
+      margin: 0 auto;
+      font-size: 22px;
+      color: #323232;
+      margin-top: 40px;
+      margin-bottom: 20px; }
+    #registers .register form {
+      margin: 0 auto;
+      width: 420px; }
+      #registers .register form div {
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 20px; }
+        #registers .register form div .icon-asterisk {
+          color: red;
+          font-size: 16px;
+          float: left;
+          line-height: 40px;
+          margin-right: 5px; }
+        #registers .register form div .icon-ren, #registers .register form div .icon-63, #registers .register form div .icon-mima1 {
+          float: left;
+          border: 1px solid #CCCCCC;
+          border-right: none;
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          line-height: 40px;
+          font-size: 18px; }
+        #registers .register form div input {
+          border: 1px solid #CCCCCC;
+          border-left: none;
+          height: 40px;
+          padding-left: 20px;
+          float: left;
+          width: 270px;
+          font-size: 14px; }
+      #registers .register form .content2 input {
+        width: 170px; }
+      #registers .register form .content2 button {
+        width: 90px;
+        margin-left: 10px;
+        height: 40px;
+        background: #FF6633;
+        color: white; }
+      #registers .register form .content3 {
+        height: 42px;
+        overflow: visible;
+        position: relative; }
+        #registers .register form .content3 .level {
+          position: absolute;
+          left: 370px;
+          overflow: hidden;
+          top: 10px; }
+          #registers .register form .content3 .level .color_ff6633 {
+            background: #FF6633;
+            color: white; }
+          #registers .register form .content3 .level span {
+            display: inline-block;
+            width: 60px;
+            height: 20px;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 20px;
+            float: left; }
+          #registers .register form .content3 .level span:nth-child(2) {
+            border-left: none;
+            border-right: none; }
+      #registers .register form .content4 {
+        padding-top: 10px; }
+        #registers .register form .content4 input {
+          height: 15px;
+          width: 15px;
+          margin: 1px 5px 5px 50px; }
+        #registers .register form .content4 span {
+          font-size: 14px; }
+        #registers .register form .content4 a {
+          color: #3399FF;
+          font-size: 14px; }
+      #registers .register form .submit {
+        width: 330px;
+        border-radius: 5px;
+        height: 50px;
+        background: #FF6633;
+        font-size: 16px;
+        color: white;
+        margin-left: -2px; }
+
+/*# sourceMappingURL=register.css.map */

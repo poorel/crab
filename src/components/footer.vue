@@ -1,0 +1,35 @@
+<template>
+  <div id="footer1">
+    <div class="w">
+      <div class="footer_message">
+        <p>
+          <span class="iconfont icon-dizhi"></span>
+          <span>江苏省泰州市兴化市合陈镇桂山村</span>
+        </p>
+        <a href="mailto:1010097590@qq.com?subject=crab商务通知">
+          <span class="iconfont icon-cmstubiaozitihua15"></span>
+          <span>1010097590@qq.com</span>
+        </a>
+        <p>
+          <span class="iconfont icon-icon32206"></span>
+          <span>13775659846</span>
+        </p>
+      </div>
+      <div class="bei1">
+        {{a}}
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+  export default {
+    name: 'footer1',
+    props: ['a']
+  }
+</script>
+
+<style>
+  @import "../assets/css/footer.css";
+</style>

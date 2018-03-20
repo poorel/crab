@@ -1,0 +1,113 @@
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+/*css 初始化 */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img { margin:0; padding:0; }
+fieldset, img,input,button { border:none; padding:0;margin:0;outline-style:none; }   /*去掉input等聚焦时的蓝色边框*/
+ul, ol { list-style:none; }
+input { padding-top:0; padding-bottom:0;}
+select, input { vertical-align:middle;}
+select, input, textarea { font-size:12px; margin:0; }
+textarea { resize:none; } /*防止拖动*/
+img {border:0; vertical-align:middle; }  /*  去掉图片低测默认的3像素空白缝隙，或者用display：block也可以*/
+table { border-collapse:collapse; }
+body {
+  font:14px/150% Microsoft YaHei,Verdana,"\5b8b\4f53";
+  color:#666;
+  background:#fff
+}
+.clearfix:before,.clearfix:after {  /*清楚浮动*/
+  content:"";
+  display:table;
+}
+.clearfix:after{clear:both;}
+.clearfix{
+  *zoom:1;/*IE/7/6*/
+}
+a {text-decoration:none; }
+a:hover{color:#C81623;}
+/*h1,h2,h3,h4,h5,h6 {text-decoration:none;font-weight:normal;font-size:100%;}*/  /*设置h标签的大小，设置跟父亲一样大的字体font-size:100%;*/
+s,i,em{font-style:normal;text-decoration:none;}
+.col-red{color: #C81623!important;}
+
+/*公共类*/
+.w,.w1190 {  /*版心 提取 */
+  width: 1190px;margin:0 auto;
+}
+.fl {
+  float:left
+}
+.fr {
+  float:right
+}
+.hide {
+  display:none
+}
+.red{
+  color: red;
+}
+button{
+  cursor: pointer;
+}
+.infinite{
+  animation-iteration-count: infinite;
+}
+
+
+/*place颜色*/
+input::-webkit-input-placeholder{
+  color:#BFBFBF;} 　
+input:-moz-placeholder{
+  　　color:#BFBFBF;}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+  　　color:#BFBFBF;}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+  　　color:#BFBFBF;}
+/*闪*/
+.shan{
+  position: absolute;
+  left: 0;
+  right: 20px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  pointer-events: none;
+  background-color: rgba(255,255,255,.4);
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -o-border-radius: 100%;
+  -ms-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  -webkit-animation: ball-scale 1s 0s ease-in-out infinite;
+  -moz-animation: ball-scale 1s 0s ease-in-out infinite;
+  -ms-animation: ball-scale 1s 0s ease-in-out infinite;
+  -o-animation: ball-scale 1s 0s ease-in-out infinite;
+  animation: ball-scale 1s 0s ease-in-out infinite;
+}
+@keyframes ball-scale {
+  from {width:0px;height: 0px;border: 1px solid #f0ad4e}
+  50%{width:25px;height:25px;border: 1px solid white}
+  to {width:50px;height:50px;border: 1px solid #f0ad4e}
+}
+/*三角*/
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-left: 14px solid #ff6633;
+  border-bottom: 10px solid transparent;
+}
+/*老版本添加*/
+
+
+

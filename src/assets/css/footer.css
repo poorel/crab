@@ -1,0 +1,31 @@
+#footer1 {
+  background: #333333;
+  padding: 10px 0px; }
+
+.w {
+  overflow: hidden; }
+  .w div {
+    float: left; }
+  .w .footer_message {
+    width: 900px; }
+    .w .footer_message p, .w .footer_message a {
+      width: 300px;
+      float: left; }
+      .w .footer_message p .icon-icon32206, .w .footer_message a .icon-icon32206 {
+        color: #ff6633; }
+      .w .footer_message p .icon-cmstubiaozitihua15, .w .footer_message a .icon-cmstubiaozitihua15 {
+        color: #17EF5F; }
+      .w .footer_message p .icon-dizhi, .w .footer_message a .icon-dizhi {
+        color: #1795EF; }
+      .w .footer_message p .iconfont, .w .footer_message a .iconfont {
+        font-size: 28px; }
+      .w .footer_message p span, .w .footer_message a span {
+        display: block;
+        text-align: center;
+        height: 20px;
+        line-height: 20px;
+        font-size: 16px;
+        margin: 5px 0px;
+        color: #666666; }
+
+/*# sourceMappingURL=footer.css.map */

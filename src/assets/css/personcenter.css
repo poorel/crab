@@ -1,0 +1,189 @@
+#personcenter {
+  min-height: 824px; }
+  #personcenter .orders {
+    width: 100%; }
+    #personcenter .orders h2 {
+      width: 100%;
+      height: 40px;
+      color: white;
+      line-height: 40px;
+      margin: 0 auto;
+      text-align: center;
+      border-bottom: 1px solid white;
+      background: #FF6633; }
+    #personcenter .orders .order_list {
+      width: 100%; }
+      #personcenter .orders .order_list > p {
+        width: 90%;
+        margin: 0 auto;
+        background: #CCCCCC; }
+        #personcenter .orders .order_list > p span {
+          display: inline-block;
+          box-sizing: border-box; }
+        #personcenter .orders .order_list > p span:nth-child(1) {
+          width: 35%; }
+        #personcenter .orders .order_list > p span:nth-child(2) {
+          width: 9%; }
+        #personcenter .orders .order_list > p span:nth-child(3) {
+          width: 9%; }
+        #personcenter .orders .order_list > p span:nth-child(4) {
+          width: 15%; }
+        #personcenter .orders .order_list > p span:nth-child(5) {
+          width: 15%; }
+        #personcenter .orders .order_list > p span:nth-child(6) {
+          width: 15%;
+          padding-left: 32px; }
+      #personcenter .orders .order_list ul {
+        width: 90%;
+        margin: auto; }
+        #personcenter .orders .order_list ul li {
+          width: 100%;
+          overflow: hidden;
+          padding: 10px 0px;
+          border-bottom: 1px solid #ebebeb; }
+          #personcenter .orders .order_list ul li > div {
+            float: left;
+            width: 35%;
+            overflow: hidden; }
+            #personcenter .orders .order_list ul li > div img {
+              width: 60px;
+              height: 60px;
+              float: left; }
+            #personcenter .orders .order_list ul li > div span {
+              width: 290px;
+              margin-left: 10px;
+              float: left;
+              margin-top: 20px; }
+          #personcenter .orders .order_list ul li > span {
+            float: left;
+            line-height: 60px;
+            box-sizing: border-box; }
+          #personcenter .orders .order_list ul li .price {
+            width: 9%; }
+          #personcenter .orders .order_list ul li .number {
+            width: 9%;
+            padding-left: 18px; }
+          #personcenter .orders .order_list ul li .ordernumber {
+            width: 15%; }
+          #personcenter .orders .order_list ul li .ordertime {
+            width: 15%;
+            color: #FF6633; }
+          #personcenter .orders .order_list ul li .orderstate1 {
+            width: 15%; }
+          #personcenter .orders .order_list ul li .orderstate2, #personcenter .orders .order_list ul li .orderstate3 {
+            width: 15%;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            color: #d2d2d2; }
+          #personcenter .orders .order_list ul li p {
+            float: left; }
+            #personcenter .orders .order_list ul li p span {
+              height: 60px;
+              line-height: 60px;
+              width: 60px;
+              margin: 0px 10px; }
+  #personcenter .address {
+    width: 100%; }
+    #personcenter .address h2 {
+      text-align: center;
+      width: 100%;
+      height: 40px;
+      color: white;
+      line-height: 40px;
+      margin: 0 auto;
+      border-bottom: 1px solid white;
+      background: #FF6633; }
+    #personcenter .address .address_content .add_address {
+      width: 100%; }
+      #personcenter .address .address_content .add_address h3 {
+        color: #323232;
+        height: 36px;
+        line-height: 36px; }
+      #personcenter .address .address_content .add_address > span {
+        display: inline-block;
+        width: 100px;
+        height: 30px;
+        text-align: right;
+        line-height: 30px;
+        margin-top: 10px; }
+      #personcenter .address .address_content .add_address input {
+        margin: 10px 0px 0px 10px;
+        height: 28px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        line-height: 30px;
+        padding-left: 20px; }
+      #personcenter .address .address_content .add_address #detail_addre1 {
+        width: 240px; }
+      #personcenter .address .address_content .add_address #detail_addre2 {
+        width: 240px; }
+      #personcenter .address .address_content .add_address #detail_addre3 {
+        width: 240px; }
+      #personcenter .address .address_content .add_address > div {
+        width: 100%;
+        overflow: hidden;
+        margin: 10px 0px; }
+        #personcenter .address .address_content .add_address > div button {
+          float: right;
+          width: 160px;
+          height: 40px;
+          background: #FF6633;
+          color: white;
+          font-size: 18px; }
+    #personcenter .address .address_content .address_list {
+      width: 100%; }
+      #personcenter .address .address_content .address_list h3 {
+        color: #323232;
+        height: 36px;
+        line-height: 36px; }
+      #personcenter .address .address_content .address_list p {
+        width: 100%;
+        overflow: hidden; }
+        #personcenter .address .address_content .address_list p span {
+          float: left;
+          background: #999999;
+          color: #323232;
+          font-size: 16px;
+          height: 35px;
+          line-height: 35px; }
+        #personcenter .address .address_content .address_list p span:nth-child(1) {
+          width: 10%; }
+        #personcenter .address .address_content .address_list p span:nth-child(2) {
+          width: 50%; }
+        #personcenter .address .address_content .address_list p span:nth-child(3) {
+          width: 20%; }
+        #personcenter .address .address_content .address_list p span:nth-child(4) {
+          width: 20%;
+          text-align: center; }
+      #personcenter .address .address_content .address_list ul {
+        width: 100%; }
+        #personcenter .address .address_content .address_list ul li {
+          width: 100%;
+          overflow: hidden;
+          border: 1px solid #CCCCCC;
+          box-sizing: border-box; }
+          #personcenter .address .address_content .address_list ul li input {
+            float: left;
+            font-size: 14px;
+            height: 30px;
+            line-height: 30px;
+            box-sizing: border-box;
+            padding-left: 10px;
+            border-right: 1px solid #ebebeb; }
+          #personcenter .address .address_content .address_list ul li input:nth-child(1) {
+            width: 10%; }
+          #personcenter .address .address_content .address_list ul li input:nth-child(2) {
+            width: 50%; }
+          #personcenter .address .address_content .address_list ul li input:nth-child(3) {
+            width: 20%; }
+          #personcenter .address .address_content .address_list ul li span:nth-child(4) {
+            width: 20%; }
+          #personcenter .address .address_content .address_list ul li span {
+            text-align: center;
+            float: left;
+            font-size: 14px;
+            height: 30px;
+            box-sizing: border-box;
+            line-height: 30px; }
+
+/*# sourceMappingURL=personcenter.css.map */

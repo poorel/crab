@@ -1,0 +1,46 @@
+#crab_head {
+  padding: 10px 0px;
+  height: 40px;
+  overflow: hidden; }
+  #crab_head p {
+    float: left; }
+  #crab_head .logo {
+    height: 50px; }
+    #crab_head .logo span {
+      font-size: 30px;
+      color: #ff6633;
+      line-height: 36px; }
+  #crab_head .regiter_login {
+    margin: 10px 0px 0px 30px;
+    cursor: pointer; }
+    #crab_head .regiter_login i {
+      color: #FF6633;
+      font-size: 14px;
+      margin-right: 10px; }
+  #crab_head ul {
+    float: left;
+    margin-left: 40px; }
+    #crab_head ul li:hover {
+      color: #ff6633; }
+    #crab_head ul li {
+      float: left;
+      font-size: 18px;
+      padding: 10px;
+      color: #525252; }
+  #crab_head .buy_car {
+    float: left;
+    border: 1px solid #ebebeb;
+    width: 100px;
+    height: 30px;
+    margin-left: 40px;
+    text-align: center;
+    cursor: pointer;
+    position: relative; }
+    #crab_head .buy_car .iconfont {
+      line-height: 30px;
+      color: #FF6633; }
+    #crab_head .buy_car .col-red {
+      position: absolute;
+      font-size: 12px; }
+
+/*# sourceMappingURL=header.css.map */

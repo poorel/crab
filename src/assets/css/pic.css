@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/*万能清除浮动法（选添加class选择符执行，否则影响范围太大）*/
+/*高和行高，垂直居中*/
+/*浏览器兼容类*/
+/*@keyframes,transition*/
+/*
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-moz-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-o-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-ms-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}*/
+#boxlist {
+  max-width: 720px;
+  height: 500px;
+  background: green;
+  /*h-shadow v-shadow blur spread color inset;*/
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-left: 20px; }
+  #boxlist .box, #boxlist .box1, #boxlist .box2, #boxlist .box3 {
+    background: black; }
+  #boxlist .box {
+    width: 120px;
+    margin-right: 20px;
+    float: left;
+    height: 50px; }
+  #boxlist .box1 {
+    width: 260px;
+    margin-right: 20px;
+    float: left;
+    height: 50px; }
+  #boxlist .box2 {
+    width: 400px;
+    margin-right: 20px;
+    float: left;
+    height: 50px; }
+  #boxlist .box3 {
+    width: 120px;
+    margin-right: 20px;
+    float: left;
+    height: 50px; }
+
+/*# sourceMappingURL=pic.css.map */

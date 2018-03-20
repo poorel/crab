@@ -1,0 +1,111 @@
+#home .bg {
+  background: url("../images/bg.jpg") no-repeat center;
+  height: 600px; }
+  #home .bg p {
+    text-align: center;
+    width: 1190px;
+    font-size: 32px;
+    color: white;
+    font-weight: bolder;
+    height: 120px;
+    line-height: 40px;
+    margin-top: 200px; }
+#home .taocan {
+  overflow: visible !important;
+  padding: 25px 0 15px;
+  text-align: center; }
+  #home .taocan h2 {
+    font-size: 28px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #323232;
+    margin-bottom: 20px; }
+  #home .taocan ul:after {
+    content: "";
+    display: block;
+    clear: both; }
+  #home .taocan ul {
+    display: block; }
+    #home .taocan ul li:nth-child(4n) {
+      margin-right: 0px; }
+    #home .taocan ul li {
+      display: block;
+      width: 282px;
+      height: 330px;
+      float: left;
+      margin-right: 20px;
+      background: white;
+      margin-bottom: 20px; }
+      #home .taocan ul li a img {
+        width: 282px;
+        height: 211.5px; }
+      #home .taocan ul li .li-down {
+        padding: 20px 10px 10px; }
+        #home .taocan ul li .li-down p:nth-child(1) {
+          margin-bottom: 5px;
+          width: 262px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left; }
+          #home .taocan ul li .li-down p:nth-child(1) a {
+            font-weight: 700;
+            font-size: 14px;
+            color: #323232; }
+        #home .taocan ul li .li-down p:nth-child(2) {
+          color: #999;
+          font-size: 14px;
+          text-align: left; }
+        #home .taocan ul li .li-down div {
+          padding: 5px 0px;
+          overflow: hidden;
+          width: 100%; }
+          #home .taocan ul li .li-down div span {
+            color: red;
+            font-size: 16px;
+            line-height: 30px;
+            float: left; }
+          #home .taocan ul li .li-down div a {
+            border-radius: 5px;
+            border: 1px solid #FF6633;
+            display: block;
+            color: #ff6633;
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            float: right;
+            text-align: center; }
+#home .abstract h2, #home .sketch h2 {
+  font-size: 28px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #323232; }
+#home .abstract .little, #home .sketch .little {
+  font-size: 18px;
+  height: 30px;
+  line-height: 30px;
+  color: #83C0F0;
+  margin: 20px 0px;
+  text-align: right; }
+#home .abstract .abstract_content, #home .sketch .abstract_content {
+  font-size: 20px;
+  color: #d2d2d2;
+  line-height: 25px; }
+  #home .abstract .abstract_content i, #home .sketch .abstract_content i {
+    color: #FF6633; }
+#home .abstract ul, #home .sketch ul {
+  overflow: hidden; }
+  #home .abstract ul li:nth-child(4n), #home .sketch ul li:nth-child(4n) {
+    margin-right: 0px; }
+  #home .abstract ul li, #home .sketch ul li {
+    float: left;
+    width: 240px;
+    height: 180px;
+    margin-right: 76.5px; }
+    #home .abstract ul li img, #home .sketch ul li img {
+      width: 240px;
+      height: 180px; }
+
+/*# sourceMappingURL=home.css.map */

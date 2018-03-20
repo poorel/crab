@@ -1,0 +1,184 @@
+/*万能清除浮动法（选添加class选择符执行，否则影响范围太大）*/
+//:after {content:"."; display:block; height:0; visibility:hidden; clear:both; }
+
+/*高和行高，垂直居中*/
+@mixin hl($heightL:40px,$center:false){
+  height: $heightL;
+  line-height: $heightL;
+  @if $center {
+    text-align: $center;
+  }
+}
+
+@mixin header($heightL:40px,$color:#fff,$overflow:true){
+  height: $heightL;
+  background: $color;
+  @if $overflow {
+    overflow: hidden;
+  }
+}
+
+@mixin ul($width:auto,$overflow:true,$height:false){
+  width: $width;
+  @if $overflow {
+    overflow: hidden;
+  }
+  @if $height {
+    height: $height;
+  }
+}
+
+@mixin li($width:auto,$height:100%,$left:false){
+  width: $width;
+  height: $height;
+  @if $left {
+    float: $left;
+  }
+}
+
+@mixin div($width:auto,$height:100%,$block:false){
+  width: $width;
+  height: $height;
+  @if $block {
+    display: $block;
+  }
+}
+
+@mixin position($position:absolute,$top:false,$left:false){
+  position: $position;
+  @if $left {
+    left: $left;
+  }
+  @if $top {
+    top: $top;
+  }
+}
+
+@mixin ft($ft:16px,$color:false,$bolder:false){
+  font-size: $ft;
+  @if $color {
+    color: $color;
+  }
+  @if $bolder {
+    font-weight: bolder;
+  }
+}
+
+@mixin p($ft:16px,$color:false,$lheight:false,$overflow:true){
+  font-size: $ft;
+  @if $color {
+    color: $color;
+  }
+  @if $lheight {
+    line-height: $lheight;
+  }
+  @if $overflow {
+    overflow: hidden;
+  }
+}
+
+%omit{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+/*浏览器兼容类*/
+/*@keyframes,transition*/
+@mixin box-sizing ($sizing:border-box) {/*h-shadow v-shadow blur spread color inset;*/
+  -webkit-box-sizing:$sizing;
+  -moz-box-sizing:$sizing;
+  box-sizing:$sizing;
+}
+
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow:$shadow;
+  box-shadow:$shadow;
+}
+
+@mixin animation ($config) {/*name,time,ease,delay,count,是否返回。@keyframes*/
+  -webkit-transition:$config;
+  transition:$config;
+}
+
+@mixin transition ($config) {/*name,time,ease,delay,多组值的效果有空测试一下*/
+  -moz-transition:$config;
+  -webkit-transition:$config;
+  -o-transition:$config;
+  transition:$config;
+}
+
+@mixin transform ($move) {
+  -ms-transform:$move;
+  -moz-transform:$move;
+  -webkit-transform:$move;
+  -o-transform:$move;
+  transform:$move;
+}
+
+@mixin backface ($boolean:hidden) {/*visible|hidden*/
+  -webkit-backface-visibility:$boolean;
+  -moz-backface-visibility:$boolean;
+  -ms-backface-visibility:$boolean;
+  backface-visibility:$boolean;
+}
+
+@mixin columns ($article:100px 3) {/*宽和列数*/
+  -webkit-columns:$article;
+  -moz-columns:$article;
+  columns:$article;
+}
+
+%flexbox {  /*@extend %flexbox;*/
+  display: -webkit-flex;
+  display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+}
+
+@mixin flex ($config:1) {/*flex-grow flex-shrink flex-basis|auto|initial|inherit/0 1 auto/*/
+  -webkit-flex: $config;
+  -ms-flex: $config;
+  flex: $config;
+  -webkit-box-flex: $config;
+  -moz-box-flex: $config;
+}
+
+@mixin perspective ($range:1000) {/*视距*/
+  perspective: $range;
+  -webkit-perspective: $range;
+}
+
+@mixin opacity ($opacity:1) {/*透明度兼容*/
+  filter: alpha(opacity=$opacity*100);
+  -moz-opacity: $opacity;
+  -khtml-opacity: $opacity;
+  opacity: $opacity;
+}
+
+@mixin border-radius ($radius:0.3rem) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin letter-spacing ($letter:8px){
+  letter-spacing:$letter;
+  text-indent:$letter;
+}
+/*
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-moz-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-o-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-ms-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}*/

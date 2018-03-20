@@ -1,0 +1,391 @@
+body {
+  background-color: #FAFAFA; }
+
+.title {
+  height: 40px;
+  padding-left: 10px; }
+  .title span {
+    line-height: 40px;
+    font-size: 12px;
+    color: #989898; }
+    .title span a {
+      color: #989898; }
+  .title .subordinate {
+    margin: 0 10px; }
+
+.introduce {
+  height: 400px;
+  background-color: #FAFAFA; }
+  .introduce .left-img {
+    float: left;
+    height: 400px;
+    width: 360px;
+    overflow: hidden;
+    background-color: white;
+    position: relative; }
+    .introduce .left-img .carousel {
+      position: relative;
+      overflow: hidden;
+      padding: 10px 10px; }
+      .introduce .left-img .carousel li {
+        display: block;
+        width: 340px;
+        height: 320px;
+        text-align: center; }
+        .introduce .left-img .carousel li img {
+          width: 320px;
+          height: 320px; }
+    .introduce .left-img .indicator {
+      position: relative;
+      overflow: hidden;
+      height: 54px;
+      width: 324px;
+      margin-left: 20px; }
+      .introduce .left-img .indicator li {
+        border: 2px solid white;
+        height: 50px;
+        vertical-align: middle;
+        float: left; }
+        .introduce .left-img .indicator li img {
+          width: 50px;
+          height: 50px; }
+      .introduce .left-img .indicator .border {
+        border-color: #FF6633; }
+    .introduce .left-img button {
+      position: absolute;
+      background: none; }
+    .introduce .left-img .btl {
+      width: 20px;
+      height: 55px;
+      top: 339px;
+      left: 0px;
+      background: url("../images/right.png") repeat-y center; }
+    .introduce .left-img .btl:hover {
+      background: url("../images/right2.png") repeat-y center; }
+    .introduce .left-img .btr {
+      width: 20px;
+      height: 55px;
+      top: 339px;
+      right: -1px;
+      background: url("../images/left.png") repeat-y center; }
+    .introduce .left-img .btr:hover {
+      background: url("../images/left2.png") repeat-y center; }
+  .introduce .right-message {
+    height: 390px;
+    background-color: white;
+    padding-left: 20px;
+    padding-top: 10px;
+    width: 580px;
+    float: left; }
+    .introduce .right-message .message {
+      overflow: hidden;
+      width: 530px; }
+      .introduce .right-message .message .conciseMessage {
+        width: 460px;
+        float: left; }
+        .introduce .right-message .message .conciseMessage h2 {
+          color: #323232;
+          line-height: 20px;
+          font-size: 18px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          height: 20px;
+          width: 460px; }
+        .introduce .right-message .message .conciseMessage .price_red {
+          height: 40px;
+          background: #FDE5E0;
+          border-top: 1px dotted #FF6633;
+          border-bottom: 1px dotted #FF6633;
+          margin: 10px 0px; }
+          .introduce .right-message .message .conciseMessage .price_red span:nth-child(1) {
+            line-height: 40px;
+            margin-left: 20px;
+            font-size: 18px; }
+          .introduce .right-message .message .conciseMessage .price_red span:nth-child(2) {
+            margin-left: 80px;
+            font-size: 20px;
+            color: #FD4D13;
+            line-height: 40px; }
+        .introduce .right-message .message .conciseMessage .discount {
+          width: 100%; }
+          .introduce .right-message .message .conciseMessage .discount p {
+            margin: 5px 0px;
+            width: 100%;
+            background: rgba(255, 102, 51, 0.7); }
+            .introduce .right-message .message .conciseMessage .discount p span:nth-child(1) {
+              margin-left: 20px;
+              color: #EF4005; }
+            .introduce .right-message .message .conciseMessage .discount p span:nth-child(2) {
+              margin-left: 40px;
+              color: white; }
+      .introduce .right-message .message .share {
+        width: 60px;
+        float: left;
+        margin-left: 10px;
+        position: relative; }
+        .introduce .right-message .message .share .iconfont {
+          font-size: 18px;
+          color: #FF6633; }
+        .introduce .right-message .message .share span {
+          font-size: 14px;
+          display: block;
+          margin-bottom: 40px; }
+        .introduce .right-message .message .share span:nth-child(2) {
+          cursor: pointer; }
+        .introduce .right-message .message .share .shareBox {
+          display: none;
+          position: absolute;
+          width: 144px;
+          top: 60px;
+          left: -35px; }
+          .introduce .right-message .message .share .shareBox a {
+            font-size: 16px; }
+    .introduce .right-message .price {
+      width: 420px;
+      height: 40px;
+      padding: 20px;
+      margin-top: 10px;
+      background-color: #F2F2F2;
+      border-top: 1px dotted #CCCCCC;
+      border-bottom: 1px dotted #CCCCCC; }
+      .introduce .right-message .price p {
+        float: left;
+        height: 40px;
+        width: 20px;
+        background: white; }
+        .introduce .right-message .price p .iconfont:hover {
+          color: #FF6633; }
+        .introduce .right-message .price p .iconfont {
+          width: 20px;
+          height: 20px; }
+      .introduce .right-message .price input {
+        float: left;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bolder; }
+      .introduce .right-message .price button {
+        float: left;
+        margin-left: 30px;
+        width: 100px;
+        height: 40px;
+        background: #FF6633;
+        color: white; }
+    .introduce .right-message .state {
+      width: 100%;
+      padding: 15px 10px;
+      border-bottom: 1px dotted #CCCCCC; }
+      .introduce .right-message .state .state_title {
+        float: left;
+        margin-right: 40px; }
+      .introduce .right-message .state p {
+        float: left;
+        margin-right: 10px; }
+        .introduce .right-message .state p .iconfont {
+          color: #69A997; }
+    .introduce .right-message .addre {
+      padding-top: 10px; }
+      .introduce .right-message .addre .state_title {
+        float: left;
+        margin: 10px 40px 0px 10px; }
+      .introduce .right-message .addre #detail_addre {
+        float: left;
+        width: 390px;
+        padding-left: 18px;
+        font-size: 14px;
+        height: 30px;
+        margin: 10px 0px 0px 77px;
+        border: 1px solid #CCCCCC; }
+  .introduce .QRcode {
+    margin-left: 10px;
+    padding-top: 10px;
+    float: left;
+    background-color: white;
+    height: 390px;
+    vertical-align: middle; }
+    .introduce .QRcode img {
+      width: 195px;
+      height: 370px; }
+
+.content {
+  margin-top: 10px;
+  background-color: #FAFAFA;
+  overflow: hidden; }
+  .content .side-left {
+    width: 238px;
+    margin-right: 22px;
+    background-color: white;
+    float: left; }
+    .content .side-left h2 {
+      width: 238px;
+      height: 45px;
+      line-height: 45px;
+      border-bottom: 2px solid #FF6633;
+      font-size: 14px;
+      color: #323232; }
+    .content .side-left ul {
+      display: block;
+      width: 238px; }
+      .content .side-left ul li {
+        padding: 20px 0px 10px;
+        display: block;
+        border-bottom: 1px solid #ff6633; }
+        .content .side-left ul li a {
+          display: block;
+          height: 100%;
+          color: #666; }
+          .content .side-left ul li a img {
+            width: 220px;
+            margin-left: 9px; }
+          .content .side-left ul li a .recom_li_title {
+            margin-top: 10px; }
+          .content .side-left ul li a p {
+            padding: 0px 0px 2px 10px; }
+          .content .side-left ul li a .contentPrice span:first-child {
+            color: #FF6633;
+            margin-right: 25px; }
+        .content .side-left ul li a:hover {
+          color: #FF6633; }
+  .content .side-right {
+    float: left;
+    background-color: white;
+    width: 880px;
+    padding: 50px 25px 20px;
+    position: relative; }
+    .content .side-right .flow-header {
+      position: absolute;
+      height: 45px;
+      left: 0;
+      top: 0px; }
+      .content .side-right .flow-header ul {
+        background-color: #F6F6F6;
+        height: 45px;
+        width: 928px;
+        border: 1px solid #E4E4E4; }
+        .content .side-right .flow-header ul li {
+          display: block;
+          float: left;
+          width: 120px;
+          line-height: 45px;
+          border-right: 1px solid #E4E4E4;
+          text-align: center;
+          font-size: 14px;
+          color: #323232;
+          cursor: pointer; }
+    .content .side-right .flow-header-fixed {
+      width: 100%;
+      left: 0px;
+      position: fixed;
+      top: 0px;
+      background-color: #F6F6F6;
+      border: 1px solid #E4E4E4; }
+      .content .side-right .flow-header-fixed ul {
+        display: block;
+        margin: 0 auto;
+        height: 45px;
+        width: 940px;
+        padding-left: 262px; }
+        .content .side-right .flow-header-fixed ul li {
+          display: block;
+          float: left;
+          width: 120px;
+          line-height: 45px;
+          border-right: 1px solid #E4E4E4;
+          text-align: center;
+          font-size: 14px; }
+        .content .side-right .flow-header-fixed ul li:first-child {
+          border-left: 1px solid #E4E4E4; }
+    .content .side-right .baseMessage {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 20px; }
+      .content .side-right .baseMessage h2 {
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        color: #323232;
+        background-color: #F5F5F5;
+        padding-left: 20px;
+        margin-bottom: 15px;
+        font-size: 16px; }
+      .content .side-right .baseMessage div {
+        width: 100%; }
+        .content .side-right .baseMessage div .odd, .content .side-right .baseMessage div .even {
+          width: 40%;
+          float: left;
+          height: 30px; }
+          .content .side-right .baseMessage div .odd span, .content .side-right .baseMessage div .even span {
+            display: block;
+            float: left;
+            line-height: 30px;
+            font-size: 14px !important; }
+          .content .side-right .baseMessage div .odd span:first-child, .content .side-right .baseMessage div .even span:first-child {
+            width: 90px;
+            font-size: 16px;
+            color: #323232;
+            padding-left: 30px; }
+          .content .side-right .baseMessage div .odd span:first-child + span, .content .side-right .baseMessage div .even span:first-child + span {
+            font-size: 16px; }
+        .content .side-right .baseMessage div .even {
+          width: 60% !important; }
+    .content .side-right .carDetail {
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: 20px; }
+      .content .side-right .carDetail h2 {
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        color: #323232;
+        background-color: #F5F5F5;
+        padding-left: 20px;
+        margin-bottom: 15px;
+        font-size: 16px; }
+      .content .side-right .carDetail div {
+        width: 100%; }
+        .content .side-right .carDetail div p {
+          display: block;
+          padding: 0 20px;
+          font-size: 14px;
+          line-height: 25px; }
+    .content .side-right .buyCar {
+      width: 100%;
+      overflow: hidden; }
+      .content .side-right .buyCar h2 {
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        color: #323232;
+        background-color: #F5F5F5;
+        padding-left: 20px;
+        font-size: 16px; }
+      .content .side-right .buyCar div {
+        width: 100%;
+        text-align: center; }
+        .content .side-right .buyCar div img {
+          width: 676px;
+          margin-top: 10px; }
+    .content .side-right .financialCase {
+      margin-top: 20px;
+      width: 100%;
+      overflow: hidden; }
+      .content .side-right .financialCase h2 {
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        color: #323232;
+        background-color: #F5F5F5;
+        padding-left: 20px;
+        margin-bottom: 15px;
+        font-size: 16px; }
+      .content .side-right .financialCase div {
+        width: 100%;
+        text-align: center; }
+        .content .side-right .financialCase div img {
+          width: 676px;
+          display: block;
+          margin: auto; }
+
+/*# sourceMappingURL=single.css.map */

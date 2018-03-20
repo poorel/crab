@@ -1,0 +1,20 @@
+.gitgnore
+# Windows:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+node_modules
+dist
+.idea
+
+# Python:
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build
+
+# My configurations:
+db.ini
+deploy_key_rsa

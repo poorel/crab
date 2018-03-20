@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/*万能清除浮动法（选添加class选择符执行，否则影响范围太大）*/
+/*高和行高，垂直居中*/
+/*浏览器兼容类*/
+/*@keyframes,transition*/
+/*
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-moz-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-o-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-ms-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}*/
+
+/*# sourceMappingURL=var.css.map */
