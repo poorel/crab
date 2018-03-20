@@ -16,14 +16,12 @@ export default {
     }
     state.user.commodity.forEach(function (val) {
       if (val.single == obj.single) {
-        console.log('同一个数据')
         val.number += obj.number// vuex
         window.localStorage.setItem(state.user.name, JSON.stringify(state.user.commodity))// 本地数据
         a = 0
       }
     })
     if (a) {
-      console.log('新数据')
       state.user.commodity.push(obj)
       window.localStorage.setItem(state.user.name, JSON.stringify(state.user.commodity))// 本地数据
     };

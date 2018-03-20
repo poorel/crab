@@ -1,7 +1,7 @@
 <template>
   <div id="personcenter" class="w">
     <div class="orders">
-      <h2>订单列表</h2>
+      <h2>订单列表(未完善)</h2>
       <div class="order_list">
         <p>
           <span>&nbsp;商品名</span><!--图片加标题-->
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="address_list">
-          <h3>地址列表(最多保存５条收货地址(需要后台设置一下，不太高兴做))</h3>
+          <h3>地址列表</h3>
           <p>
             <span>&nbsp;收货人</span>
             <span>&nbsp;收货地址</span>
@@ -70,134 +70,122 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  import VDistpicker from 'v-distpicker'
-  import {startMove} from '../assets/js/move'
-  export default {
-    name: 'personcenter',
-    data () {
-      return {
-        placeholders: {
-          province: '------- 省 --------',
-          city: '--- 市 ---',
-          area: '--- 区 ---'
-        },
-        detailaddress: '',
-        name: '',
-        receiver: '',
-        orderlist: [],
-        address: [],
-        view: false, // pop
-        view_content: '' // pop
+import {mapGetters} from 'vuex'
+import VDistpicker from 'v-distpicker'
+import {startMove} from '../assets/js/move'
+import {getAddress, getOrderList} from '../assets/js/getmessage'
+export default {
+  name: 'personcenter',
+  data () {
+    return {
+      placeholders: {
+        province: '------- 省 --------',
+        city: '--- 市 ---',
+        area: '--- 区 ---'
+      },
+      detailaddress: '',
+      name: '',
+      receiver: '',
+      orderlist: [],
+      address: [],
+      view: false, // pop
+      view_content: '' // pop
+    }
+  },
+  computed: {
+    ...mapGetters(['getUser', 'getLoding'])
+  },
+  methods: {
+    cc (data) {
+      this.placeholders.province = data.value
+    },
+    bb (data) {
+      this.placeholders.city = data.value
+    },
+    aa (data) {
+      this.placeholders.area = data.value
+    },
+    pop (x) {
+      this.view_content = x
+      this.view = true
+      setTimeout(() => {
+        this.view = false
+      }, 1500)
+    },
+    little_up (el) {
+      var ele = el.currentTarget
+      ele.setAttribute('style', 'box-shadow:0px 0px 10px 0px #ff6633;')
+      startMove(ele, {'margin-top': -5})
+    },
+    little_down (el) {
+      var ele = el.currentTarget
+      ele.setAttribute('style', 'box-shadow:none;')
+      startMove(ele, {'margin-top': 0})
+    },
+    addaddress () {
+      if (!this.placeholders.province) {
+        this.pop('请选择您所在的省份')
+        return false
       }
-    },
-    computed: {
-      ...mapGetters(['getUser', 'getLoding'])
-    },
-    methods: {
-      cc (data) {
-        this.placeholders.province = data.value
-      },
-      bb (data) {
-        this.placeholders.city = data.value
-      },
-      aa (data) {
-        this.placeholders.area = data.value
-      },
-      pop (x) {
-        this.view_content = x
-        this.view = true
-        setTimeout(() => {
-          this.view = false
-        }, 1500)
-      },
-      little_up (el) {
-        var ele = el.currentTarget
-        ele.setAttribute('style', 'box-shadow:0px 0px 10px 0px #ff6633;')
-        startMove(ele, {'margin-top': -5})
-      },
-      little_down (el) {
-        var ele = el.currentTarget
-        ele.setAttribute('style', 'box-shadow:none;')
-        startMove(ele, {'margin-top': 0})
-      },
-      addaddress () {
-        if (!this.placeholders.province) {
-          this.pop('请选择您所在的省份')
-          return false
-        }
-        if (!this.placeholders.city) {
-          this.pop('请选择您所在的城市')
-          return false
-        }
-        /* if(!this.placeholders.area){
-          this.pop('请选择您所在的街区');
-          return false;
-        } */
-        if (!this.detailaddress) {
-          this.pop('请填写您的详细地址')
-          return false
-        }
-        if (!this.name) {
-          this.pop('请填写收件人姓名')
-          return false
-        }
-        if (!this.receiver) {
-          this.pop('请填写收件人手机号码')
-          return false
-        } else {
-          if (!(/^1[34578]\d{9}$/.test(this.receiver))) {
-            this.pop('手机号码填写不规范')
-            return false
-          }
-        }
-        // 添加地址
-        // let user = this.$router.history.current.query.user;
-        let user = this.getUser.name
-        this.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=0&receiver=${this.receiver}&name=${this.name}&addre=${this.placeholders.province + this.placeholders.city/* +this.placeholders.area */+ ' ' + this.detailaddress}`).then((res) => {
-          res.data.protocol41 ? this.pop('添加成功') : this.pop('添加错误，请重试')
-          window.location.reload // 待改善
-          // 添加进入当前数组或者直接刷新
-        }).catch((res) => {
-          console.log(res)
-        })
-      },
-      decaddress (x) {
-        let user = this.getUser.name
-        this.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=1&id=${x}`).then((res) => {
-          if (res.data.protocol41) {
-            this.pop('删除成功')
-            this.address.forEach(function (val, index) {
-              if (val.id == x) {
-                this.splice(index, 1)
-              }
-            }.bind(this.address))
-          } else {
-            this.pop('服务器错误，请重试')
-          }
-        }).catch((res) => {
-          console.log(res)
-        })
+      if (!this.placeholders.city) {
+        this.pop('请选择您所在的城市')
+        return false
       }
-    },
-    components: {
-      VDistpicker
-    },
-    mounted () {
-      let user = this.$router.history.current.query.user
-      this.$http.get(`http://47.94.107.160:8888/orders?phonecode=${user}&type=3`).then((res) => {
-        this.orderlist = res.data
+      if (!this.detailaddress) {
+        this.pop('请填写您的详细地址')
+        return false
+      }
+      if (!this.name) {
+        this.pop('请填写收件人姓名')
+        return false
+      }
+      if (!this.receiver) {
+        this.pop('请填写收件人手机号码')
+        return false
+      } else {
+        if (!(/^1[34578]\d{9}$/.test(this.receiver))) {
+          this.pop('手机号码填写不规范')
+          return false
+        }
+      }
+      // 添加地址
+      // let user = this.$router.history.current.query.user;
+      let user = this.getUser.name
+      let detailaddress = this.placeholders.province + this.placeholders.city/* +this.placeholders.area */+ ' ' + this.detailaddress
+      this.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=0&receiver=${this.receiver}&name=${this.name}&addre=${detailaddress}`).then((res) => {
+        res.data.protocol41 ? this.pop('添加成功') : this.pop('添加错误，请重试')
+        getAddress(this)
+        // 添加进入当前数组或者直接刷新
       }).catch((res) => {
         console.log(res)
       })
-      // 获取地址
-      this.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=3`).then((res) => {
-        this.address = res.data
+    },
+    decaddress (x) {
+      let user = this.getUser.name
+      this.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=1&id=${x}`).then((res) => {
+        if (res.data.protocol41) {
+          this.pop('删除成功')
+          this.address.forEach(function (val, index) {
+            if (val.id == x) {
+              this.splice(index, 1)
+            }
+          }.bind(this.address))
+        } else {
+          this.pop('服务器错误，请重试')
+        }
       }).catch((res) => {
         console.log(res)
       })
     }
+  },
+  components: {
+    VDistpicker
+  },
+  mounted () {
+    getOrderList(this)
+    getAddress(this)
   }
+}
 </script>
 
 <style>

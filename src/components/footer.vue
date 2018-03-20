@@ -24,10 +24,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'footer1',
-    props: ['a']
-  }
+export default {
+  name: 'footer1',
+  props: ['a']
+}
 </script>
 
 <style>

@@ -40,103 +40,103 @@
   </div>
 </template>
 <script>
-  import {mapActions, mapGetters} from 'vuex'
-  var login = {
-    name: 'login_content',
-    data () {
-      return {
-        header_show: true, // 控制头部参数
-        phonecode: '',
-        pwd: '',
-        view: false, // pop
-        view_content: '' // pop
-      }
+import {mapActions, mapGetters} from 'vuex'
+var login = {
+  name: 'login_content',
+  data () {
+    return {
+      header_show: true, // 控制头部参数
+      phonecode: '',
+      pwd: '',
+      view: false, // pop
+      view_content: '' // pop
+    }
+  },
+  methods: {
+    ...mapActions(['adduser', 'full']),
+    pop (x) {
+      this.view_content = x
+      this.view = true
+      setTimeout(() => {
+        this.view = false
+      }, 1500)
     },
-    methods: {
-      ...mapActions(['adduser', 'full']),
-      pop (x) {
-        this.view_content = x
-        this.view = true
-        setTimeout(() => {
-          this.view = false
-        }, 1500)
-      },
-      login () {
-        let phoneCode = this.phonecode
-        if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(phoneCode))) {
-          this.pop('请输入正确的手机号码')
-          return false
-        };
-        let pwd = this.pwd
-        if (!this.pwdtest) {
-          this.pop('请输入6-20位常规密码')
-          return false
-        }
-        this.$http({
-          method: 'get',
-          url: `http://47.94.107.160:8888/login?phonecode=${phoneCode}&pwd=${pwd}`
-        }).then((res) => {
-          if (res.data.statu) {
-            this.adduser(phoneCode)
-            let storage = window.localStorage.getItem(phoneCode)
-            if (storage) {
-              if (storage.length) {
-                this.full(JSON.parse(storage))
-              }
-            } else {
-              window.localStorage.setItem(phoneCode, [])
+    login () {
+      let phoneCode = this.phonecode
+      if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(phoneCode))) {
+        this.pop('请输入正确的手机号码')
+        return false
+      };
+      let pwd = this.pwd
+      if (!this.pwdtest) {
+        this.pop('请输入6-20位常规密码')
+        return false
+      }
+      this.$http({
+        method: 'get',
+        url: `http://47.94.107.160:8888/login?phonecode=${phoneCode}&pwd=${pwd}`
+      }).then((res) => {
+        if (res.data.statu) {
+          this.adduser(phoneCode)
+          let storage = window.localStorage.getItem(phoneCode)
+          if (storage) {
+            if (storage.length) {
+              this.full(JSON.parse(storage))
             }
-
-            this.$router.push({path: '/home'})
           } else {
-            this.pop('账号或密码错误')
+            window.localStorage.setItem(phoneCode, [])
           }
-        }).catch((res) => {
-          this.pop('请求失败，请再次尝试')
-        })
-      }
-    },
-    components: {
 
-    },
-    computed: {
-      ...mapGetters(['getUser']),
-      pwdtest: function () {
-        let pwd = this.pwd
-        var $test1 = /^([a-zA-Z]{6,20})|([0-9]{6,20})|([@#$%^&*]{6,20})$///  弱：纯数字，纯字母，纯特殊字符
-        var $test21 = /(?!^\d+$)(?!^[a-zA-Z]+$)(?!^[@#$%^&*]+$)^([0-9a-zA-Z]{6,20})$/
-        var $test22 = /(?!^\d+$)(?!^[a-zA-Z]+$)(?!^[@#$%^&*]+$)^([@#$%^&*a-zA-Z]{6,20})$/
-        var $test23 = /(?!^\d+$)(?!^[a-zA-Z]+$)(?!^[@#$%^&*]+$)^([0-9@#$%^&*]{6,20})$/// 中：字母+数字，字母+特殊字符，数字+特殊字符
-        var $test3 = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[~!@#$%^&*])[\da-zA-Z~!@#$%^&*]{6,20}$/   // 强：字母+数字+特殊字符
-        var mima = 0
-        if ($test3.test(pwd)) {
-          mima = 3// 强密码
-        } else if ($test21.test(pwd) | $test22.test(pwd) | $test23.test(pwd)) {
-          mima = 2// 中密码
-        } else if ($test1.test(pwd)) {
-          mima = 1// 弱密码
+          this.$router.push({path: '/home'})
         } else {
-          mima = 0// 密码格式错误
+          this.pop('账号或密码错误')
         }
-        return mima
+      }).catch((res) => {
+        this.pop('请求失败，请再次尝试')
+      })
+    }
+  },
+  components: {
+
+  },
+  computed: {
+    ...mapGetters(['getUser']),
+    pwdtest: function () {
+      let pwd = this.pwd
+      var $test1 = /^([a-zA-Z]{6,20})|([0-9]{6,20})|([@#$%^&*]{6,20})$///  弱：纯数字，纯字母，纯特殊字符
+      var $test21 = /(?!^\d+$)(?!^[a-zA-Z]+$)(?!^[@#$%^&*]+$)^([0-9a-zA-Z]{6,20})$/
+      var $test22 = /(?!^\d+$)(?!^[a-zA-Z]+$)(?!^[@#$%^&*]+$)^([@#$%^&*a-zA-Z]{6,20})$/
+      var $test23 = /(?!^\d+$)(?!^[a-zA-Z]+$)(?!^[@#$%^&*]+$)^([0-9@#$%^&*]{6,20})$/// 中：字母+数字，字母+特殊字符，数字+特殊字符
+      var $test3 = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[~!@#$%^&*])[\da-zA-Z~!@#$%^&*]{6,20}$/ // 强：字母+数字+特殊字符
+      var mima = 0
+      if ($test3.test(pwd)) {
+        mima = 3// 强密码
+      } else if ($test21.test(pwd) | $test22.test(pwd) | $test23.test(pwd)) {
+        mima = 2// 中密码
+      } else if ($test1.test(pwd)) {
+        mima = 1// 弱密码
+      } else {
+        mima = 0// 密码格式错误
       }
-    },
-    beforeMount () {
-      // 触发头部显影
-      var result = this.header_show
-      this.$emit('header_if', result)
-      // enter事件
-      document.onkeyup = (e) => {
-        if (window.event) { e = window.event }// 如果window.event对象存在，就以此事件对象为准
-        var code = e.charCode || e.keyCode
-        if (code == 13) {
-          this.login()
-        }
+      return mima
+    }
+  },
+  beforeMount () {
+    // 触发头部显影
+    var result = this.header_show
+    this.$emit('header_if', result)
+    // enter事件
+    document.onkeyup = (e) => {
+      if (window.event) { e = window.event }// 如果window.event对象存在，就以此事件对象为准
+      var code = e.charCode || e.keyCode
+      if (code == 13) {
+        this.login()
       }
     }
   }
+}
 
-  export default login
+export default login
 </script>
 <style>
   @import "../assets/css/login.css";

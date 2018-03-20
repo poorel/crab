@@ -162,113 +162,113 @@
   </div>
 </template>
 <script>
-  import {mapActions, mapGetters} from 'vuex'
-  import VDistpicker from 'v-distpicker'
-  export default {
-    name: 'single',
-    data () {
-      return {
-        province: '',
-        city: '',
-        area: '',
-        img_index: 0,
-        carousel: [],
-        borderindex: 0,
-        number: 1,
-        singlemessage: [],
-        id: 1,
-        recommendation: []
-      }
-    },
-    methods: {
-      ...mapActions(['addcarts', 'clear']),
-      flushCom: function () {
-        // router是路由实例,例如:var router = new Router({})
-        // router.go(n)是路由的一个方法，意思是在history记录中前进或者后退多少步，0就表示还是当前，类似window.history.go(n)
-        this.$router.go(0)
-      },
-      // 账户是否已登陆
-      user () {
-        this.getUser ? this.addcarts({'single': this.id, 'number': this.number}) : this.$router.push({path: '/login'})
-      },
-      // 控制轮播小图边框
-      border (x) {
-        var index = this.borderindex
-        if (x == index) {
-          return true
-        } else {
-          return false
-        }
-      },
-      left1 () {
-        this.borderindex > 0 ? this.borderindex-- : this.borderindex = 0
-      },
-      right1 () {
-        let uplimit = this.carousel.length - 1
-        this.borderindex < uplimit ? this.borderindex++ : this.borderindex = uplimit
-      },
-      up1 () {
-        this.number++
-      },
-      down1 () {
-        this.number > 0 ? this.number-- : this.number = 0
-      },
-      buy () {
-        this.user()
-        var user = this.getUser.name
-        this.$router.push({path: '/checkout', query: {user}})
-      },
-      select_img (el) {
-        var ele = el.currentTarget
-        this.borderindex = ele.getAttribute('index')
-      }
-    },
-    components: {
-      VDistpicker
-    },
-    computed: {
-      ...mapGetters(['getUser', 'getLoding'])
-    },
-    mounted () {
-      this.id = this.$route.query.singleid
-      if (!this.id) {
-        this.$router.push({path: '/single?singleid=001'})
-      }
-      this.$http.get('http://47.94.107.160:8888/single?singleid=' + this.id).then((res) => {
-        // 折扣参数
-        var dist = []
-        if (res.data[0].dist1) {
-          dist.push(res.data[0].dist1)
-        }
-        if (res.data[0].dist2) {
-          dist.push(res.data[0].dist2)
-        }
-        if (res.data[0].dist3) {
-          dist.push(res.data[0].dist3)
-        }
-        // 轮播参数
-        var index00 = res.data[0].pic.search(/\d+\.jpg/)
-        var index99 = res.data[0].pic.length - 1
-        var headed = res.data[0].pic.slice(0, index00)// 头
-        var footer = '.jpg'// 尾
-        var numbottom = res.data[0].pic.charAt(index00)// 初始数字
-        var numtop = res.data[0].pic.charAt(index99)// 末尾数字
-        for (numbottom; numbottom <= numtop; numbottom++) {
-          this.carousel.push(headed + numbottom + footer)
-        }
-        this.singlemessage = [res.data[0].name, res.data[0].price, dist]
-      }).catch((res) => {
-        // 失败直接跳转走
-        console.log(res)
-      })
-      this.$http.get('http://47.94.107.160:8888/mysql?tablename=taocan').then((res) => {
-        this.recommendation = res.data
-        // console.log(this.recommendation);
-      }).catch((res) => {
-        console.log(res)
-      })
+import {mapActions, mapGetters} from 'vuex'
+import VDistpicker from 'v-distpicker'
+export default {
+  name: 'single',
+  data () {
+    return {
+      province: '',
+      city: '',
+      area: '',
+      img_index: 0,
+      carousel: [],
+      borderindex: 0,
+      number: 1,
+      singlemessage: [],
+      id: 1,
+      recommendation: []
     }
+  },
+  methods: {
+    ...mapActions(['addcarts', 'clear']),
+    flushCom: function () {
+      // router是路由实例,例如:var router = new Router({})
+      // router.go(n)是路由的一个方法，意思是在history记录中前进或者后退多少步，0就表示还是当前，类似window.history.go(n)
+      this.$router.go(0)
+    },
+    // 账户是否已登陆
+    user () {
+      this.getUser ? this.addcarts({'single': this.id, 'number': this.number}) : this.$router.push({path: '/login'})
+    },
+    // 控制轮播小图边框
+    border (x) {
+      var index = this.borderindex
+      if (x == index) {
+        return true
+      } else {
+        return false
+      }
+    },
+    left1 () {
+      this.borderindex > 0 ? this.borderindex-- : this.borderindex = 0
+    },
+    right1 () {
+      let uplimit = this.carousel.length - 1
+      this.borderindex < uplimit ? this.borderindex++ : this.borderindex = uplimit
+    },
+    up1 () {
+      this.number++
+    },
+    down1 () {
+      this.number > 0 ? this.number-- : this.number = 0
+    },
+    buy () {
+      this.user()
+      var user = this.getUser.name
+      this.$router.push({path: '/checkout', query: {user}})
+    },
+    select_img (el) {
+      var ele = el.currentTarget
+      this.borderindex = ele.getAttribute('index')
+    }
+  },
+  components: {
+    VDistpicker
+  },
+  computed: {
+    ...mapGetters(['getUser', 'getLoding'])
+  },
+  mounted () {
+    this.id = this.$route.query.singleid
+    if (!this.id) {
+      this.$router.push({path: '/single?singleid=001'})
+    }
+    this.$http.get('http://47.94.107.160:8888/single?singleid=' + this.id).then((res) => {
+      // 折扣参数
+      var dist = []
+      if (res.data[0].dist1) {
+        dist.push(res.data[0].dist1)
+      }
+      if (res.data[0].dist2) {
+        dist.push(res.data[0].dist2)
+      }
+      if (res.data[0].dist3) {
+        dist.push(res.data[0].dist3)
+      }
+      // 轮播参数
+      var index00 = res.data[0].pic.search(/\d+\.jpg/)
+      var index99 = res.data[0].pic.length - 1
+      var headed = res.data[0].pic.slice(0, index00)// 头
+      var footer = '.jpg'// 尾
+      var numbottom = res.data[0].pic.charAt(index00)// 初始数字
+      var numtop = res.data[0].pic.charAt(index99)// 末尾数字
+      for (numbottom; numbottom <= numtop; numbottom++) {
+        this.carousel.push(headed + numbottom + footer)
+      }
+      this.singlemessage = [res.data[0].name, res.data[0].price, dist]
+    }).catch((res) => {
+      // 失败直接跳转走
+      console.log(res)
+    })
+    this.$http.get('http://47.94.107.160:8888/mysql?tablename=taocan').then((res) => {
+      this.recommendation = res.data
+      // console.log(this.recommendation);
+    }).catch((res) => {
+      console.log(res)
+    })
   }
+}
 </script>
 
 <style>

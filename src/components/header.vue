@@ -31,51 +31,51 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
-  export default {
-    name: 'crab_head',
-    data () {
-      return {
-        test: '测试数据'
-      }
-    },
-    methods: {
-      // ...mapActions(["addcarts","clear"]),
-      logout () {
-        var user = this.getUser.name
-        this.$http.get('http://47.94.107.160:8888/login?logout=1&phonecode=' + user).then((res) => {
-          if (res.data === '注销成功') {
-            this.$router.go({path: '/home'})
-          }
-        }).catch((res) => {
-          console.log(res)
-        })
-      }
-    },
-    computed: {
-      ...mapGetters(['getUser', 'getLoding']),
-      checkuser () {
-        if (this.getUser) {
-          var user = this.getUser.name
-          return '/checkout?user=' + user
-        } else {
-          return '/login'
-        }
-      },
-      check () {
-        if (this.getUser) {
-          var user = this.getUser.name
-          return '/personcenter?user=' + user
-        } else {
-          return '/login'
-        }
-      }
-    },
-    mounted () {
-      var result = this.test
-      this.$emit('test1', result)
+import {mapGetters} from 'vuex'
+export default {
+  name: 'crab_head',
+  data () {
+    return {
+      test: '测试数据'
     }
+  },
+  methods: {
+    // ...mapActions(["addcarts","clear"]),
+    logout () {
+      var user = this.getUser.name
+      this.$http.get('http://47.94.107.160:8888/login?logout=1&phonecode=' + user).then((res) => {
+        if (res.data === '注销成功') {
+          this.$router.go({path: '/home'})
+        }
+      }).catch((res) => {
+        console.log(res)
+      })
+    }
+  },
+  computed: {
+    ...mapGetters(['getUser', 'getLoding']),
+    checkuser () {
+      if (this.getUser) {
+        var user = this.getUser.name
+        return '/checkout?user=' + user
+      } else {
+        return '/login'
+      }
+    },
+    check () {
+      if (this.getUser) {
+        var user = this.getUser.name
+        return '/personcenter?user=' + user
+      } else {
+        return '/login'
+      }
+    }
+  },
+  mounted () {
+    var result = this.test
+    this.$emit('test1', result)
   }
+}
 </script>
 <style>
   @import "../assets/css/header.css";

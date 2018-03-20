@@ -4,21 +4,21 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'popup',
-    data () {
-      return {
-
-      }
-    },
-    props: ['popup_content'],
-    methods: {
-
-    },
-    mounted () {
+export default {
+  name: 'popup',
+  data () {
+    return {
 
     }
+  },
+  props: ['popup_content'],
+  methods: {
+
+  },
+  mounted () {
+
   }
+}
 </script>
 <style>
   #popup{
