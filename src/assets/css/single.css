@@ -172,7 +172,8 @@ body {
         width: 100px;
         height: 40px;
         background: #FF6633;
-        color: white; }
+        color: white;
+        border-radius: 3px; }
     .introduce .right-message .state {
       width: 100%;
       padding: 15px 10px;

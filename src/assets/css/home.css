@@ -26,7 +26,8 @@
     display: block;
     clear: both; }
   #home .taocan ul {
-    display: block; }
+    display: block;
+    padding: 50px 0px; }
     #home .taocan ul li:nth-child(4n) {
       margin-right: 0px; }
     #home .taocan ul li {
@@ -39,7 +40,8 @@
       margin-bottom: 20px; }
       #home .taocan ul li a img {
         width: 282px;
-        height: 211.5px; }
+        height: 211.5px;
+        box-sizing: border-box; }
       #home .taocan ul li .li-down {
         padding: 20px 10px 10px; }
         #home .taocan ul li .li-down p:nth-child(1) {

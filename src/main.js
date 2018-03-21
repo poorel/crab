@@ -10,7 +10,7 @@ import './assets/css/base.css'
 // 全局js
 import 'babel-polyfill'
 // 加密解密
-import {getAES, getDAes} from './assets/js/encrypt'
+import {getAES, getDAes} from 'jsPath/encrypt'
 Vue.prototype.$getAES = getAES
 // 路由
 import VueRouter from 'vue-router'
