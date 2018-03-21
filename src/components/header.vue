@@ -14,7 +14,7 @@
     </p>
     <ul>
       <router-link to="/home"><li>推荐套餐</li></router-link>
-      <router-link to="/single?singleid=001"><li>购物页</li></router-link>
+      <router-link :to="single"><li>购物页</li></router-link>
       <li>产地美景</li>
       <li>螃蟹百科</li>
       <li>蟹卡赠礼</li>
@@ -54,9 +54,14 @@ export default {
   },
   computed: {
     ...mapGetters(['getUser', 'getLoding']),
+    single () {
+      var user = this.$getAES('001')
+      return '/single?singleid=' + user
+    },
     checkuser () {
       if (this.getUser) {
-        var user = this.getUser.name
+        // var user = this.getUser.name
+        var user = this.$getAES(this.getUser.name)
         return '/checkout?user=' + user
       } else {
         return '/login'
@@ -64,7 +69,7 @@ export default {
     },
     check () {
       if (this.getUser) {
-        var user = this.getUser.name
+        var user = this.$getAES(this.getUser.name)
         return '/personcenter?user=' + user
       } else {
         return '/login'

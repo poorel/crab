@@ -20,10 +20,10 @@
       <ul>
         <li v-for="(val,index) in checkoutlist">
           <span :class="{'iconfont' :true,'icon-dui': val.check}" v-on:click="checkToggle(index)"></span><!--正方边框-->
-          <router-link :to="{path:'/single',query:{'singleid': val.singleid}}"><!--表单+id-->
+          <router-link :to="{path:'/single',query:{'singleid': val.id}}"><!--表单+id-->
             <img :src=val.pic>
           </router-link>
-          <router-link :to="{path:'/single',query:{'singleid':val.singleid}}"><!--表单+id-->
+          <router-link :to="{path:'/single',query:{'singleid': val.id}}"><!--表单+id-->
             <p class="title_a">{{val.name}}</p>
           </router-link>
           <div class="dist_all">
@@ -234,7 +234,9 @@ export default {
             // 减价，折扣率
             val.rate = 10
             val.saleprice = 0
-          })
+            // url参数加密
+            val.id = this.$getAES(val.id)
+          }, this)
           this.checkoutlist = res.data
           console.log(this.checkoutlist)
         }

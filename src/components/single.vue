@@ -215,7 +215,7 @@ export default {
     },
     buy () {
       this.user()
-      var user = this.getUser.name
+      var user = this.$getAES(this.getUser.name)
       this.$router.push({path: '/checkout', query: {user}})
     },
     select_img (el) {
@@ -230,9 +230,9 @@ export default {
     ...mapGetters(['getUser', 'getLoding'])
   },
   mounted () {
-    this.id = this.$route.query.singleid
+    this.id = this.$route.query.singleid // 解密如果在服务器，当密钥改变，本地存储的商品将失效
     if (!this.id) {
-      this.$router.push({path: '/single?singleid=001'})
+      this.$router.push({path: '/single?singleid=' + this.$getAES('001')})
     }
     this.$http.get('http://47.94.107.160:8888/single?singleid=' + this.id).then((res) => {
       // 折扣参数
@@ -262,8 +262,11 @@ export default {
       console.log(res)
     })
     this.$http.get('http://47.94.107.160:8888/mysql?tablename=taocan').then((res) => {
+      res.data.forEach(val => {
+        val.singleid = this.$getAES(val.singleid)
+      }, this)
       this.recommendation = res.data
-      // console.log(this.recommendation);
+      // console.log(this.recommendation);singleid
     }).catch((res) => {
       console.log(res)
     })

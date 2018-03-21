@@ -91,6 +91,9 @@ export default {
   },
   mounted () {
     this.$http.get('http://47.94.107.160:8888/mysql?tablename=taocan').then((res) => {
+      res.data.forEach((val) => {
+        val.singleid = this.$getAES(val.singleid)
+      })
       this.taocan_arr = res.data
     }).catch((res) => {
       console.log(res)
