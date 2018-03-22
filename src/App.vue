@@ -1,5 +1,6 @@
 <template>
   <div id="body_content">
+    <loading v-show="getLoding"></loading>
     <header1 v-show='header_show != false'></header1>
     <!--内容一致，<keep-alive>就无需加载-->
     <router-view @header_if="change1"></router-view>

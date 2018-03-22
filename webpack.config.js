@@ -1,14 +1,16 @@
 var path = require('path')// 配置好的默认路径
 var webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
+const CreatHtml = require('html-webpack-plugin')
 
 module.exports = {
   // context: path.resolve(__dirname, 'app')设置根目录，默认以webpack所在目录做根目录
   entry: './src/main.js', // string、array、object['./app/entry1', './app/entry2']// { a: './app/entry-a', b: ['./app/entry-b1', './app/entry-b2']}
   output: {
     path: path.resolve(__dirname, 'dist'), // 保存路径
-    publicPath: '/dist/', // 构建后的路径？？服务器地址下对应的js输出路径
-    filename: 'build.js' // 转换后的文件名
+    publicPath: '/', // 构建后的路径？？服务器地址下对应的js输出路径
+    filename: '[name].bundle.js'
+    // filename: 'build.js' '[name].bundle.js' 转换后的文件名
   },
   module: {
     rules: [
@@ -80,7 +82,24 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
+    new CreatHtml({
+      template: './src/index.html',
+      filename: 'index.html',
+      inject: true,
+      chunks: ['common.js', 'main', 0],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+
+      }
+    })
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -93,13 +112,13 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
+      sourceMap: false,
       compress: {
         warnings: false
       }
     }),
     new webpack.LoaderOptionsPlugin({
-      minimize: true,
+      minimize: true
       /* options: {
         postcss: function () {
           return [require('autoprefixer')]

@@ -12,7 +12,7 @@
         </a>
         <p>
           <span class="iconfont icon-icon32206"></span>
-          <span>13775659846</span>
+          <span>my phone number: 17312129390</span>
         </p>
       </div>
       <div class="bei1">
@@ -26,7 +26,7 @@
 <script>
 export default {
   name: 'footer1',
-  props: ['a']
+  props: ['努力！']
 }
 </script>
 

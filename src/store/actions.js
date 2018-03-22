@@ -5,10 +5,13 @@ export default({
     commit(types.ADD_USER, val)
   },
   showLoading: ({commit, state}) => {
+    console.log('show')
     commit(types.SHOW_LOADING)
   },
   hideLoading: ({commit, state}) => {
-    commit(types.HIDE_LOADING)
+    setTimeout(() => {
+      commit(types.HIDE_LOADING)
+    }, 500)
   },
   addcarts: ({commit, state}, val) => {
     commit(types.ADD_CARTS, val)

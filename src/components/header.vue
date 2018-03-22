@@ -45,7 +45,8 @@ export default {
       var user = this.getUser.name
       this.$http.get('http://47.94.107.160:8888/login?logout=1&phonecode=' + user).then((res) => {
         if (res.data === '注销成功') {
-          this.$router.go({path: '/home'})
+          this.$router.go(0)
+          this.$router.push({path: '/home'})
         }
       }).catch((res) => {
         console.log(res)

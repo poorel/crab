@@ -3,6 +3,9 @@ import App from './App.vue'
 // 全局组件
 import popup from './components/tool/popup.vue'
 Vue.component('popup', popup)
+
+import loading from './components/tool/loading.vue'
+Vue.component('loading', loading)
 // 全局css
 import 'animate.css'
 import './assets/css/font/iconfont.css'
@@ -45,14 +48,12 @@ axios.defaults.withCredentials = true
 Vue.prototype.$http = axios
 // axios拦截器
 axios.interceptors.request.use(function (config) {
-  //  console.log(this.$router)
   store.dispatch('showLoading')
   return config
 }, function (error) {
   return error
 })
 axios.interceptors.response.use(function (config) {
-  // console.log(config)
   store.dispatch('hideLoading')
   return config
 }, function (error) {
