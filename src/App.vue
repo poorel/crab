@@ -16,7 +16,7 @@ export default {
   name: 'body_content',
   data () {
     return {
-      header_show: true
+      header_show: '爱你就像爱生命'
     }
   },
   methods: {

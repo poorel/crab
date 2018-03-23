@@ -26,7 +26,7 @@
 <script>
 export default {
   name: 'footer1',
-  props: ['努力！']
+  props: ['a']
 }
 </script>
 

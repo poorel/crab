@@ -52,7 +52,7 @@
             <span>&nbsp;操作</span>
           </p>
           <ul>
-            <li v-for="(val,index) in address" :addresid=val.id :class="{select:index==addselect}">
+            <li v-for="(val,index) in address" :class="{select:index==addselect}">
               <input type="text" readonly :value=val.name>
               <input type="text" readonly :value=val.addres>
               <input type="text" readonly :value=val.receiver>
@@ -150,20 +150,23 @@ export default {
     },
     addOrder () {
       if (this.allprice) {
-        // 订单页填充,待完成
-        /* var that = this
-        var arr = []// 订单信息
-
-        this.$http.get(`http://47.94.107.160:8888/orders?phonecode=${user}&arr=${JSON.stringify(arr)}&type=0&address=${address}`).then((res) => {
-          if (res.data.protocol41 == undefined) {
-            // 购车删除
-            arr1.forEach(function (val, key) {
-              that.deccarts(val)
-            })
-          }
-        }).catch((res) => {
-          console.log(res)
-        }) */
+        let user = this.$router.history.current.query.user
+        let addressid = this.address[this.addselect].id
+        let commodityPool = this.checkoutlist.filter(function (val) {
+          return val.check
+        })
+        commodityPool = JSON.stringify(commodityPool)
+        this.$http.get(`http://47.94.107.160:8888/orders?phonecode=${user}&arr=${commodityPool}&type=0&address=${addressid}`).then((res) => {
+          JSON.parse(commodityPool).forEach(function (val) {
+            this.deccarts(val.id)
+          }, this)
+          this.checkoutlist = this.checkoutlist.filter(function (val) {
+            return !val.check
+          })
+          this.pop('添加成功，您可以在个人中心查看啦~')
+        }).catch((err) => {
+          console.log(err)
+        })
       } else {
         this.pop('请勾选您想要结算的商品')
       }
@@ -191,7 +194,6 @@ export default {
       singleArr.push(parseInt(val.single))
     })
     var singleStr = JSON.stringify(singleArr.filter(val => parseInt(val) >= 0))
-    console.log(singleStr)
     if (singleStr.length) {
       // 获取购物车商品
       this.$http.get(`http://47.94.107.160:8888/checkout?phonecode=${user}&single=${singleStr}`).then((res) => {
@@ -230,7 +232,7 @@ export default {
               }
             }
             // 初始默认不勾选
-            val.check = 0
+            val.check = false
             // 减价，折扣率
             val.rate = 10
             val.saleprice = 0
@@ -238,7 +240,6 @@ export default {
             val.id = this.$getAES(val.id)
           }, this)
           this.checkoutlist = res.data
-          console.log(this.checkoutlist)
         }
       }).catch((res) => {
         console.log(res)

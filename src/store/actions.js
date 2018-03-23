@@ -5,7 +5,6 @@ export default({
     commit(types.ADD_USER, val)
   },
   showLoading: ({commit, state}) => {
-    console.log('show')
     commit(types.SHOW_LOADING)
   },
   hideLoading: ({commit, state}) => {
