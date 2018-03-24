@@ -1,7 +1,7 @@
 <template>
   <div id="personcenter" class="w">
     <div class="orders">
-      <h2>订单列表(未完善)</h2>
+      <h2>订单列表(目前只能展示)</h2>
       <div class="order_list">
         <p>
           <span>&nbsp;商品名</span><!--图片加标题-->

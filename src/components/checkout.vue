@@ -58,7 +58,7 @@
               <input type="text" readonly :value=val.receiver>
               <button type="button" v-on:click="selectaddress(index)">选择</button>
             </li>
-            <p v-if="!address">您还未添加收获地址，请前往个人中心管理~</p>
+            <p v-if="!address">您还未添加收货地址，请前往个人中心管理~</p>
           </ul>
         </div>
       </ul>

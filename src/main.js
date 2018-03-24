@@ -28,7 +28,6 @@ router.beforeEach(function (to, from, next) {
   for (let key in to.query) { // 解密
     to.query[key] = getDAes(to.query[key])
   }
-  console.log(to.query)
   next()
 })
 

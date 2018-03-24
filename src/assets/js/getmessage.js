@@ -12,7 +12,6 @@ function getAddress (bindthis) {
   let user = bindthis.$router.history.current.query.user
   bindthis.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=3`).then((res) => {
     bindthis.address = res.data
-    console.log(bindthis.address)
   }).catch((res) => {
     console.log(res)
   })

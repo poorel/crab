@@ -9,7 +9,7 @@
       <router-link to="/register"><b>前往注册</b></router-link>
     </p>
     <p class="regiter_login" v-if="getUser">
-      <router-link :to="check"><i class="iconfont icon-people">{{getUser.name}}</i></router-link>
+      <router-link :to="check"><i class="iconfont icon-people">{{getUser.name | star}}</i></router-link>
       <span v-on:click="logout">注销</span>
     </p>
     <ul>
@@ -100,6 +100,14 @@ export default {
       } else {
         return '/login'
       }
+    }
+  },
+  filters: {
+    star: function (value) {
+      if (!value) return ''
+      let reg = /(\d{3}).*(\d{4})/g
+      value = value.toString().replace(reg, '$1****$2')
+      return value
     }
   },
   mounted () {
