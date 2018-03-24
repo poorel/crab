@@ -24,21 +24,48 @@
 
 
 </body>
+<script src="https://unpkg.com/crypto-js@3.1.9-1/crypto-js.js"></script>
 <script>
-  function Super(){
-    this.flag = true;
-    this.const1 = function () {
-      console.log(this.flag)
-    }
+  function getAesString(data,key,iv){//加密
+    var key  = CryptoJS.enc.Utf8.parse(key);
+    var iv   = CryptoJS.enc.Utf8.parse(iv);
+    var encrypted =CryptoJS.AES.encrypt(data,key,
+      {
+        iv:iv,
+        mode:CryptoJS.mode.CBC,
+        padding:CryptoJS.pad.Pkcs7
+      });
+    return encrypted.toString();    //返回的是base64格式的密文
   }
-  function Sub(){
-     Super.call(this)//将super中的构造属性和方法都加入了sub
-    this.subFlag = false;
+  function getDAesString(encrypted,key,iv){//解密
+    var key  = CryptoJS.enc.Utf8.parse(key);
+    var iv   = CryptoJS.enc.Utf8.parse(iv);
+    var decrypted =CryptoJS.AES.decrypt(encrypted,key,
+      {
+        iv:iv,
+        mode:CryptoJS.mode.CBC,
+        padding:CryptoJS.pad.Pkcs7
+      });
+    return decrypted.toString(CryptoJS.enc.Utf8);
   }
-  Sub.prototype = new Super;
-  var obj = new Sub();
-  obj.flag = false;  //修改之后，由于是原型上的属性，之后创建的所有实例都会受到影响
-  var obj_2 = new Sub();
-  console.log(obj_2)
+
+  function getAES(data){ //加密
+    var data = data.toString();
+    var key  = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';  //24位密钥
+    var iv   = '1234';
+    var encrypted =getAesString(data,key,iv); //密文
+    var encrypted1 =CryptoJS.enc.Utf8.parse(encrypted);
+    return encrypted;
+  }
+
+  function getDAes(data){//解密
+    var key  = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';  //密钥
+    var iv   = '1234';
+    var decryptedStr =getDAesString(data,key,iv);
+    return decryptedStr;
+  }
+  var jiami = getAES('15720778581')
+  console.log(jiami)
+  console.log(getDAes(jiami))
 </script>
 </html>

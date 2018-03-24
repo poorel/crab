@@ -87,10 +87,7 @@ export default {
     },
     checkuser () {
       if (this.getUser) {
-        console.log(this.getUser)
-        // var user = this.getUser.name
         var user = this.$getAES(this.getUser.name)
-        console.log(user)
         return '/checkout?user=' + user
       } else {
         return '/login'

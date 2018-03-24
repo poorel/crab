@@ -28,10 +28,12 @@ function getAES(data){ //加密
   var iv   = '1234';
   var encrypted =getAesString(data,key,iv); //密文
   var encrypted1 =CryptoJS.enc.Utf8.parse(encrypted);
+  encrypted = encodeURIComponent(encrypted)
   return encrypted;
 }
 
 function getDAes(data){//解密
+  var data = encodeURI(data)
   var key  = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';  //密钥
   var iv   = '1234';
   var decryptedStr =getDAesString(data,key,iv);

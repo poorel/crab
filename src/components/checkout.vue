@@ -190,6 +190,7 @@ export default {
   },
   mounted () {
     var user = this.$router.history.current.query.user
+    console.log(user)
     var singleArr = []
     // var carlist = this.getUser.commodity;//刷新，等候状态管理太慢了.直接从router获取用户
     var commodity = window.localStorage.getItem(user)
