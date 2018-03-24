@@ -1,5 +1,5 @@
 #footer1 {
-  background: #333333;
+  background: #393939;
   padding: 10px 0px; }
 
 .w {
@@ -7,6 +7,7 @@
   .w div {
     float: left; }
   .w .footer_message {
+    padding: 10px 0px;
     width: 900px; }
     .w .footer_message p, .w .footer_message a {
       width: 300px;
@@ -25,7 +26,13 @@
         height: 20px;
         line-height: 20px;
         font-size: 16px;
-        margin: 5px 0px;
-        color: #666666; }
+        color: white;
+        margin-top: 12px; }
+  .w .manifesto {
+    width: 280px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 16px;
+    color: #ff6633; }
 
 /*# sourceMappingURL=footer.css.map */

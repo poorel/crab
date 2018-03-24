@@ -3,12 +3,12 @@
     <div class="bg">
       <div class="login">
         <div class="login-select">
-        <span class="login1">
-          登陆
-        </span>
+          <span class="login1">
+            登陆
+          </span>
           <span class="login2">
           手机动态登录
-        </span>
+          </span>
         </div>
         <form action="#" method="get" id="login">
           <div class="mobile">

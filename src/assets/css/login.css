@@ -1,7 +1,7 @@
 #login_content {
   min-width: 1190px;
-  height: 500px;
-  background: url("../images/login.jpg") center no-repeat; }
+  min-height: 721px;
+  background: url("../images/login.jpg") center top no-repeat; }
   #login_content .bg {
     width: 1190px;
     margin: 0 auto;

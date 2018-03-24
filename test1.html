@@ -25,15 +25,20 @@
 
 </body>
 <script>
-  class Foo {
-     classMethod() {
-      console.log('hello');
+  function Super(){
+    this.flag = true;
+    this.const1 = function () {
+      console.log(this.flag)
     }
   }
-
-  Foo.classMethod();// 'hello'
-
-  var foo = new Foo();
-  foo.classMethod()
+  function Sub(){
+     Super.call(this)//将super中的构造属性和方法都加入了sub
+    this.subFlag = false;
+  }
+  Sub.prototype = new Super;
+  var obj = new Sub();
+  obj.flag = false;  //修改之后，由于是原型上的属性，之后创建的所有实例都会受到影响
+  var obj_2 = new Sub();
+  console.log(obj_2)
 </script>
 </html>

@@ -9,20 +9,20 @@
       <router-link to="/register"><b>前往注册</b></router-link>
     </p>
     <p class="regiter_login" v-if="getUser">
-      <router-link :to="check"><i>{{getUser.name}}</i></router-link>
+      <router-link :to="check"><i class="iconfont icon-people">{{getUser.name}}</i></router-link>
       <span v-on:click="logout">注销</span>
     </p>
     <ul>
       <router-link to="/home"><li>推荐套餐</li></router-link>
-      <router-link :to="single"><li>购物页</li></router-link>
-      <li>产地美景</li>
-      <li>螃蟹百科</li>
-      <li>蟹卡赠礼</li>
-      <li>加入我们</li>
+      <router-link :to="single"><li @mouseenter="start" @mouseleave="end" :class="{ 'animated': true, 'swing': swing}" >购物页</li></router-link>
+      <li class="gray">产地美景</li>
+      <li class="gray">螃蟹百科</li>
+      <li class="gray">加入我们</li>
+      <li class="gray">个人博客</li>
     </ul>
     <div class="buy_car">
-      <span>购物车丨</span>
       <router-link :to="checkuser">
+      <span>购物车丨</span>
       <span class="iconfont icon-shuniu1"></span>
       <span class="col-red">{{getUser.commodity ? getUser.commodity.length : null}}</span>
       </router-link>
@@ -36,7 +36,9 @@ export default {
   name: 'crab_head',
   data () {
     return {
-      test: '测试数据'
+      test: '测试数据',
+      swing: false,
+      animating: 0
     }
   },
   methods: {
@@ -51,6 +53,30 @@ export default {
       }).catch((res) => {
         console.log(res)
       })
+    },
+    start () {
+      if (!this.swing) {
+        this.swing = true
+      }
+    },
+    end () {
+      function timeout (ms) {
+        return new Promise((resolve) => {
+          setTimeout(resolve, ms)
+        })
+      }
+
+      async function asyncPrint (obj, ms) {
+        await timeout(ms)
+        obj.animating = 0
+        obj.swing = false // this报错啦
+      }
+      if (!this.animating) {
+        this.animating = 1
+        asyncPrint(this, 1200)
+      }
+
+      /* 只为体验一下async */
     }
   },
   computed: {
@@ -61,8 +87,10 @@ export default {
     },
     checkuser () {
       if (this.getUser) {
+        console.log(this.getUser)
         // var user = this.getUser.name
         var user = this.$getAES(this.getUser.name)
+        console.log(user)
         return '/checkout?user=' + user
       } else {
         return '/login'

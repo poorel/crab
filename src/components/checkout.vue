@@ -58,6 +58,7 @@
               <input type="text" readonly :value=val.receiver>
               <button type="button" v-on:click="selectaddress(index)">选择</button>
             </li>
+            <p v-if="!address">您还未添加收获地址，请前往个人中心管理~</p>
           </ul>
         </div>
       </ul>
@@ -83,7 +84,7 @@ export default {
       distSelect: [], // 多种优惠0表示未开启dist1[x]代表第几个产品，其数值0.1.2.3代表其不同的折扣方式
       bounce: [],
       addselect: 0,
-      address: [], // 地址数据集合
+      address: false, // 地址数据集合
       view: false, // pop
       view_content: '' // pop
     }
@@ -149,7 +150,7 @@ export default {
       }
     },
     addOrder () {
-      if (this.allprice) {
+      if (this.allprice & this.address) {
         let user = this.$router.history.current.query.user
         let addressid = this.address[this.addselect].id
         let commodityPool = this.checkoutlist.filter(function (val) {
@@ -167,8 +168,10 @@ export default {
         }).catch((err) => {
           console.log(err)
         })
-      } else {
+      } else if (!this.allprice) {
         this.pop('请勾选您想要结算的商品')
+      } else {
+        this.pop('您还未添加收件地址，请前往个人中心管理')
       }
     }
   },
@@ -189,65 +192,72 @@ export default {
     var user = this.$router.history.current.query.user
     var singleArr = []
     // var carlist = this.getUser.commodity;//刷新，等候状态管理太慢了.直接从router获取用户
-    var carlist = JSON.parse(window.localStorage.getItem(user))// 读取本地存储
-    carlist.forEach(function (val, index) {
-      singleArr.push(parseInt(val.single))
-    })
-    var singleStr = JSON.stringify(singleArr.filter(val => parseInt(val) >= 0))
-    if (singleStr.length) {
-      // 获取购物车商品
-      this.$http.get(`http://47.94.107.160:8888/checkout?phonecode=${user}&single=${singleStr}`).then((res) => {
-        if (res.data == 'login') {
-          this.pop('请先登陆')
-        } else {
-          res.data.forEach(function (val, index) {
-            // 图片处理
-            index = val.pic.indexOf('.jpg') + 4
-            val.pic = val.pic.slice(0, index)
-            val.dist = []
-            // 折扣处理
-            val.disprice = 0
-            if (val.dist1) {
-              val.dist.push(val.dist1)
-              delete val.dist1
-            } else {
-              delete val.dist1
-            }
-            if (val.dist2) {
-              val.dist.push(val.dist2)
-              delete val.dist2
-            } else {
-              delete val.dist2
-            }
-            if (val.dist3) {
-              val.dist.push(val.dist3)
-              delete val.dist3
-            } else {
-              delete val.dist3
-            }
-            // 数量添加
-            for (let a = 0; a < carlist.length; a++) {
-              if (parseInt(carlist[a].single) == val.id) {
-                val.number = carlist[a].number
-              }
-            }
-            // 初始默认不勾选
-            val.check = false
-            // 减价，折扣率
-            val.rate = 10
-            val.saleprice = 0
-            // url参数加密
-            val.id = this.$getAES(val.id)
-          }, this)
-          this.checkoutlist = res.data
-        }
-      }).catch((res) => {
-        console.log(res)
+    var commodity = window.localStorage.getItem(user)
+    if (commodity) {
+      var carlist = JSON.parse(commodity)
+      carlist.forEach(function (val, index) {
+        singleArr.push(parseInt(val.single))
       })
+      var singleStr = JSON.stringify(singleArr.filter(val => parseInt(val) >= 0))
+      if (singleStr.length) {
+        // 获取购物车商品
+        this.$http.get(`http://47.94.107.160:8888/checkout?phonecode=${user}&single=${singleStr}`).then((res) => {
+          if (res.data == 'login') {
+            this.pop('请先登陆')
+          } else {
+            res.data.forEach(function (val, index) {
+              // 图片处理
+              index = val.pic.indexOf('.jpg') + 4
+              val.pic = val.pic.slice(0, index)
+              val.dist = []
+              // 折扣处理
+              val.disprice = 0
+              if (val.dist1) {
+                val.dist.push(val.dist1)
+                delete val.dist1
+              } else {
+                delete val.dist1
+              }
+              if (val.dist2) {
+                val.dist.push(val.dist2)
+                delete val.dist2
+              } else {
+                delete val.dist2
+              }
+              if (val.dist3) {
+                val.dist.push(val.dist3)
+                delete val.dist3
+              } else {
+                delete val.dist3
+              }
+              // 数量添加
+              for (let a = 0; a < carlist.length; a++) {
+                if (parseInt(carlist[a].single) == val.id) {
+                  val.number = carlist[a].number
+                }
+              }
+              // 初始默认不勾选
+              val.check = false
+              // 减价，折扣率
+              val.rate = 10
+              val.saleprice = 0
+              // url参数加密
+              val.id = this.$getAES(val.id)
+            }, this)
+            this.checkoutlist = res.data
+            console.log(this.checkoutlist)
+          }
+        }).catch((res) => {
+          console.log(res)
+        })
+      }
+    } else {
+      this.pop('您还未添加商品哦~')
     }
+
     // 获取地址
     this.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=3`).then((res) => {
-      this.address = res.data
+      res.data.length ? this.address = res.data : this.address = false
     }).catch((res) => {
       console.log(res)
     })

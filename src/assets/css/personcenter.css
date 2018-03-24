@@ -84,7 +84,7 @@
               width: 60px;
               margin: 0px 10px; }
   #personcenter .address {
-    width: 100%; }
+    width: 1190px; }
     #personcenter .address h2 {
       text-align: center;
       width: 100%;
@@ -95,7 +95,7 @@
       border-bottom: 1px solid white;
       background: #FF6633; }
     #personcenter .address .address_content .add_address {
-      width: 100%; }
+      width: 1190px; }
       #personcenter .address .address_content .add_address h3 {
         color: #323232;
         height: 36px;

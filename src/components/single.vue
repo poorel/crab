@@ -159,6 +159,10 @@
         </div>
       </div>
     </div>
+    <transition enter-active-class="animated fadeInUp"
+                leave-active-class="animated fadeOutDown">
+      <popup v-show="view" :popup_content="view_content"></popup>
+    </transition>
   </div>
 </template>
 <script>
@@ -176,12 +180,21 @@ export default {
       borderindex: 0,
       number: 1,
       singlemessage: [],
-      id: 1,
-      recommendation: []
+      id: 1, // 默认显示id1号商品
+      recommendation: [],
+      view: false, // pop
+      view_content: '' // pop
     }
   },
   methods: {
     ...mapActions(['addcarts', 'clear']),
+    pop (x) {
+      this.view_content = x
+      this.view = true
+      setTimeout(() => {
+        this.view = false
+      }, 1500)
+    },
     flushCom: function () {
       // router是路由实例,例如:var router = new Router({})
       // router.go(n)是路由的一个方法，意思是在history记录中前进或者后退多少步，0就表示还是当前，类似window.history.go(n)
@@ -189,7 +202,13 @@ export default {
     },
     // 账户是否已登陆
     user () {
-      this.getUser ? this.addcarts({'single': this.id, 'number': this.number}) : this.$router.push({path: '/login'})
+      if (this.getUser) {
+        this.addcarts({'single': this.id, 'number': this.number})
+        this.pop('添加成功，详细内容可点击购车查看~')
+      } else {
+        this.pop('请先登陆~')
+        this.$router.push({path: '/login'})
+      }
     },
     // 控制轮播小图边框
     border (x) {

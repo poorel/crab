@@ -20,6 +20,10 @@
   #crab_head ul {
     float: left;
     margin-left: 40px; }
+    #crab_head ul .gray {
+      color: #d5d5d5; }
+    #crab_head ul .gray:hover {
+      color: #d5d5d5; }
     #crab_head ul li:hover {
       color: #ff6633; }
     #crab_head ul li {

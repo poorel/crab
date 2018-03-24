@@ -1,22 +1,27 @@
 <template>
   <div id="body_content">
     <loading v-show="getLoding"></loading>
-    <header1 v-show='header_show != false'></header1>
+    <header-one v-show='header_show != false'></header-one>
     <!--内容一致，<keep-alive>就无需加载-->
     <router-view @header_if="change1"></router-view>
-    <footer1 :a="header_show"></footer1>
+    <footer-bottom love="爱你就像爱生命!">
+      <p slot="test" slot-scope="{ address }">
+        <span class="iconfont icon-dizhi"></span>
+        <span>{{ address }}</span>
+      </p>
+    </footer-bottom>
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
-import header1 from './components/header.vue'
-import footer1 from './components/footer.vue'
+import headerOne from './components/header.vue'
+import footerBottom from './components/footer.vue'
 export default {
   name: 'body_content',
   data () {
     return {
-      header_show: '爱你就像爱生命'
+      header_show: true
     }
   },
   methods: {
@@ -26,8 +31,8 @@ export default {
     }
   },
   components: {
-    header1,
-    footer1
+    headerOne,
+    footerBottom
   },
   computed: {
     ...mapGetters(['getUser', 'getLoding'])

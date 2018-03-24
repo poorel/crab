@@ -2,10 +2,7 @@
   <div id="footer1">
     <div class="w">
       <div class="footer_message">
-        <p>
-          <span class="iconfont icon-dizhi"></span>
-          <span>江苏省泰州市兴化市合陈镇桂山村</span>
-        </p>
+        <slot name="test" address="江苏省泰州市兴化市合陈镇桂山村"></slot> <!--插槽-->
         <a href="mailto:1010097590@qq.com?subject=crab商务通知">
           <span class="iconfont icon-cmstubiaozitihua15"></span>
           <span>1010097590@qq.com</span>
@@ -15,8 +12,8 @@
           <span>my phone number: 17312129390</span>
         </p>
       </div>
-      <div class="bei1">
-        {{a}}
+      <div class="manifesto animated rotateIn infinite">
+        <i class="">{{love}}</i>
       </div>
     </div>
   </div>
@@ -26,7 +23,13 @@
 <script>
 export default {
   name: 'footer1',
-  props: ['a']
+  props: {
+    love: {
+      type: String,
+      default: '努力工作，热爱生活',
+      required: true
+    }
+  }
 }
 </script>
 

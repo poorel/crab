@@ -4,7 +4,7 @@
   width: 100%; }
   .title span {
     line-height: 40px;
-    font-size: 12px;
+    font-size: 14px;
     color: #989898; }
     .title span a {
       color: #989898; }
@@ -186,6 +186,9 @@
             height: 30px;
             box-sizing: border-box;
             line-height: 30px; }
+        .commodity_list > ul .address_list ul p {
+          margin-top: 10px;
+          color: red; }
   .commodity_list .total_checkout {
     height: 60px;
     width: 100%;
