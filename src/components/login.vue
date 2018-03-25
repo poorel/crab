@@ -33,10 +33,7 @@
 
       </div>
     </div>
-    <transition enter-active-class="animated fadeInUp"
-                leave-active-class="animated fadeOutDown">
-      <popup v-show="view" :popup_content="view_content"></popup>
-    </transition>
+    <popup ref="pop"></popup>
   </div>
 </template>
 <script>
@@ -47,29 +44,22 @@ var login = {
     return {
       header_show: true, // 控制头部参数
       phonecode: '',
-      pwd: '',
-      view: false, // pop
-      view_content: '' // pop
+      pwd: ''
     }
   },
   methods: {
     ...mapActions(['adduser', 'full']),
-    pop (x) {
-      this.view_content = x
-      this.view = true
-      setTimeout(() => {
-        this.view = false
-      }, 1500)
-    },
     login () {
+      // this.$refs.child.$emit('childMethod') // 方法1
+      // 方法2
       let phoneCode = this.phonecode
       if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(phoneCode))) {
-        this.pop('请输入正确的手机号码')
+        this.$refs.pop.selfPOP('请输入正确的手机号码')
         return false
       };
       let pwd = this.pwd
       if (!this.pwdtest) {
-        this.pop('请输入6-20位常规密码')
+        this.$refs.pop.selfPOP('请输入6-20位常规密码')
         return false
       }
       this.$http({
@@ -89,10 +79,10 @@ var login = {
 
           this.$router.push({path: '/home'})
         } else {
-          this.pop('账号或密码错误')
+          this.$refs.pop.selfPOP('账号或密码错误')
         }
       }).catch((res) => {
-        this.pop('请求失败，请再次尝试')
+        this.$refs.pop.selfPOP('请求失败，请再次尝试')
       })
     }
   },

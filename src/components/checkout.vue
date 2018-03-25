@@ -2,7 +2,7 @@
   <div id="checkout" class="w">
     <div class="title">
       <span>当前位置：</span>
-      <span>青蟹</span>
+      <router-link to="/home"><span>青蟹</span></router-link>
       <span class="subordinate">></span>
       <span>商品结算</span>
     </div>
@@ -28,7 +28,10 @@
           </router-link>
           <div class="dist_all">
             <!--优惠-->
-            <label v-for="(val,index$1) in val.dist" v-on:click="discount(index,val,index$1)"><span :class="{checked :  distSelect[index] == index$1 }"></span>折扣{{index$1+1}}&nbsp;{{val}}</label>
+            <label v-for="(val,index$1) in val.dist" v-on:click="discount(index,val,index$1)">
+              <span :class="{checked :  distSelect[index] == index$1 }"></span>
+              折扣{{index$1+1}}&nbsp;{{val}}
+            </label>
           </div>
           <span class="unit">￥{{val.price}}</span>
           <p class="num">
@@ -68,10 +71,7 @@
         <span>合计(免运费)</span>
       </div>
     </div>
-    <transition enter-active-class="animated fadeInUp"
-                leave-active-class="animated fadeOutDown">
-      <popup v-show="view" :popup_content="view_content"></popup>
-    </transition>
+    <popup ref="pop"></popup>
   </div>
 </template>
 <script>
@@ -84,19 +84,10 @@ export default {
       distSelect: [], // 多种优惠0表示未开启dist1[x]代表第几个产品，其数值0.1.2.3代表其不同的折扣方式
       bounce: [],
       addselect: 0,
-      address: false, // 地址数据集合
-      view: false, // pop
-      view_content: '' // pop
+      address: false // 地址数据集合
     }
   },
   methods: {
-    pop (x) {
-      this.view_content = x
-      this.view = true
-      setTimeout(() => {
-        this.view = false
-      }, 1500)
-    },
     // address
     selectaddress (x) {
       this.addselect = x
@@ -126,7 +117,7 @@ export default {
           this.$set(this.checkoutlist[x], 'rate', 10)
           this.$set(this.distSelect, x, z)
         } else {
-          this.pop('您还未满足折扣要求')
+          this.$refs.pop.selfPOP('您还未满足折扣要求')
         }
       } else if (result2) {
         var rate = y.replace(re2, '$1')
@@ -164,14 +155,14 @@ export default {
           this.checkoutlist = this.checkoutlist.filter(function (val) {
             return !val.check
           })
-          this.pop('添加成功，您可以在个人中心查看啦~')
+          this.$refs.pop.selfPOP('添加成功，您可以在个人中心查看啦~')
         }).catch((err) => {
           console.log(err)
         })
       } else if (!this.allprice) {
-        this.pop('请勾选您想要结算的商品')
+        this.$refs.pop.selfPOP('请勾选您想要结算的商品')
       } else {
-        this.pop('您还未添加收件地址，请前往个人中心管理')
+        this.$refs.pop.selfPOP('您还未添加收件地址，请前往个人中心管理')
       }
     }
   },
@@ -190,7 +181,6 @@ export default {
   },
   mounted () {
     var user = this.$router.history.current.query.user
-    console.log(user)
     var singleArr = []
     // var carlist = this.getUser.commodity;//刷新，等候状态管理太慢了.直接从router获取用户
     var commodity = window.localStorage.getItem(user)
@@ -246,22 +236,25 @@ export default {
               val.id = this.$getAES(val.id)
             }, this)
             this.checkoutlist = res.data
-            console.log(this.checkoutlist)
           }
         }).catch((res) => {
           console.log(res)
         })
       }
     } else {
-      this.pop('您还未添加商品哦~')
+      this.$refs.pop.selfPOP('您还未添加商品哦~')
     }
 
     // 获取地址
-    this.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=3`).then((res) => {
-      res.data.length ? this.address = res.data : this.address = false
-    }).catch((res) => {
-      console.log(res)
-    })
+    async function getaddress (obj, url) {
+      try {
+        let responses = await obj.$http.get(url)// 原本是promise，现在直接变成的返回值
+        responses.data.length ? obj.address = responses.data : obj.address = false
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    getaddress(this, `http://47.94.107.160:8888/address?phonecode=${user}&type=3`)
   }
 }
 </script>

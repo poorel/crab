@@ -26,11 +26,14 @@ const router = new VueRouter({
 })
 router.beforeEach(function (to, from, next) {
   for (let key in to.query) { // 解密
+    // console.log(to.query[key])
     to.query[key] = getDAes(to.query[key])
   }
   next()
 })
-
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0)
+})
 // 状态管理
 import store from './store/index'
 

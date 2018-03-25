@@ -25,17 +25,18 @@ function getDAesString(encrypted,key,iv){//解密
 function getAES(data){ //加密
   var data = data.toString();
   var key  = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';  //24位密钥
-  var iv   = '1234';
+  var iv   = '06291257';
   var encrypted =getAesString(data,key,iv); //密文
-  var encrypted1 =CryptoJS.enc.Utf8.parse(encrypted);
-  encrypted = encodeURIComponent(encrypted)
+  // var encrypted1 =CryptoJS.enc.Utf8.parse(encrypted)
+  // encrypted = encodeURIComponent(encrypted)
+  // console.log(data+"加密"+encrypted)
   return encrypted;
 }
 
 function getDAes(data){//解密
-  var data = encodeURI(data)
+  // var data = encodeURI(data)
   var key  = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';  //密钥
-  var iv   = '1234';
+  var iv   = '06291257'; //8位目前正常
   var decryptedStr =getDAesString(data,key,iv);
   return decryptedStr;
 }

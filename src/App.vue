@@ -3,7 +3,7 @@
     <loading v-show="getLoding"></loading>
     <header-one v-show='header_show != false'></header-one>
     <!--内容一致，<keep-alive>就无需加载-->
-    <router-view @header_if="change1"></router-view>
+    <router-view @header_if="change1" :key="key"></router-view>
     <footer-bottom love="爱你就像爱生命!">
       <p slot="test" slot-scope="{ address }">
         <span class="iconfont icon-dizhi"></span>
@@ -26,8 +26,8 @@ export default {
   },
   methods: {
     ...mapActions(['adduser', 'full']),
-    change1 (x) {
-      this.header_show = x
+    change1 (boolean) {
+      this.header_show = boolean
     }
   },
   components: {
@@ -35,7 +35,10 @@ export default {
     footerBottom
   },
   computed: {
-    ...mapGetters(['getUser', 'getLoding'])
+    ...mapGetters(['getUser', 'getLoding']),
+    key () {
+      return this.$route.path == '/single' ? this.$route.path + new Date() : 'NoRefresh'
+    }
   },
   // beforeMount
   mounted () {

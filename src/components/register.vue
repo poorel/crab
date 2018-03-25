@@ -34,10 +34,7 @@
         <button type="button" class="submit" v-on:click="allvifi()">注册</button>
       </form>
     </div>
-    <transition enter-active-class="animated fadeInUp"
-    leave-active-class="animated fadeOutDown">
-      <popup v-show="view" :popup_content="view_content"></popup>
-    </transition>
+    <popup ref="pop"></popup>
   </div>
 </template>
 <script>
@@ -56,18 +53,11 @@ export default {
     }
   },
   methods: {
-    pop (x) {
-      this.view_content = x
-      this.view = true
-      setTimeout(() => {
-        this.view = false
-      }, 1500)
-    },
     read () { this.check ? this.check = 0 : this.check = 1 }, // 是否阅读
     verification () {
       let phoneCode = this.phoneCode
       if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(phoneCode))) {
-        this.pop('请输入正确的手机号码')
+        this.$refs.pop.selfPOP('请输入正确的手机号码')
       } else {
         this.verifycode = 60
         var bt = document.getElementById('verifycode')
@@ -82,43 +72,43 @@ export default {
         }.bind(this), 1000)
         let phoneCode = this.phoneCode
         this.$http.get('http://47.94.107.160:8888/note?phonecode=' + phoneCode).then((res) => {
-          this.pop(res.data)
+          this.$refs.pop.selfPOP(res.data)
         }).catch((res) => {
-          this.pop('服务器故障...')
+          this.$refs.pop.selfPOP('服务器故障...')
         })
       }
     }, // 验证码判断
     allvifi () {
       let phoneCode = this.phoneCode
       if (!(/^1[3|4|5|7|8][0-9]{9}$/.test(phoneCode))) {
-        this.pop('请输入正确的手机号码')
+        this.$refs.pop.selfPOP('请输入正确的手机号码')
         return false
       };
       let verificationCode = this.verification_code
       if (!(/^\d{6}$/.test(verificationCode))) {
-        this.pop('请输入6位数字验证码')
+        this.$refs.pop.selfPOP('请输入6位数字验证码')
         return false
       }
       let pwd = this.pwd
       if (!pwd) {
-        this.pop('请输入6-20位常规密码')
+        this.$refs.pop.selfPOP('请输入6-20位常规密码')
         return false
       }
       let check = this.check
       if (!check) {
-        this.pop('请阅读会员守则并勾选')
+        this.$refs.pop.selfPOP('请阅读会员守则并勾选')
         return false
       }
       // document.getElementById("register").submit();
       // 垃圾form提交
       this.$http.get('http://47.94.107.160:8888/register?phonecode=' + phoneCode + '&code=' + verificationCode + '&pwd=' + pwd).then((res) => {
         if (res.data == '注册成功') {
-          this.pop(res.data)
+          this.$refs.pop.selfPOP(res.data)
           this.$router.push({path: '/login'})
         }
-        this.pop(res.data)
+        this.$refs.pop.selfPOP(res.data)
       }).catch((res) => {
-        this.pop('服务器故障...')
+        this.$refs.pop.selfPOP('服务器故障...')
       })
     }
   },

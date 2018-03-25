@@ -62,10 +62,7 @@
       </div>
 
     </div>
-    <transition enter-active-class="animated fadeInUp"
-                leave-active-class="animated fadeOutDown">
-      <popup v-show="view" :popup_content="view_content"></popup>
-    </transition>
+    <popup ref="pop"></popup>
   </div>
 </template>
 
@@ -87,9 +84,7 @@ export default {
       name: '',
       receiver: '',
       orderlist: [],
-      address: [],
-      view: false, // pop
-      view_content: '' // pop
+      address: []
     }
   },
   computed: {
@@ -105,13 +100,6 @@ export default {
     aa (data) {
       this.placeholders.area = data.value
     },
-    pop (x) {
-      this.view_content = x
-      this.view = true
-      setTimeout(() => {
-        this.view = false
-      }, 1500)
-    },
     little_up (el) {
       var ele = el.currentTarget
       ele.setAttribute('style', 'box-shadow:0px 0px 10px 0px #ff6633;')
@@ -124,27 +112,27 @@ export default {
     },
     addaddress () {
       if (!this.placeholders.province) {
-        this.pop('请选择您所在的省份')
+        this.$refs.pop.selfPOP('请选择您所在的省份')
         return false
       }
       if (!this.placeholders.city) {
-        this.pop('请选择您所在的城市')
+        this.$refs.pop.selfPOP('请选择您所在的城市')
         return false
       }
       if (!this.detailaddress) {
-        this.pop('请填写您的详细地址')
+        this.$refs.pop.selfPOP('请填写您的详细地址')
         return false
       }
       if (!this.name) {
-        this.pop('请填写收件人姓名')
+        this.$refs.pop.selfPOP('请填写收件人姓名')
         return false
       }
       if (!this.receiver) {
-        this.pop('请填写收件人手机号码')
+        this.$refs.pop.selfPOP('请填写收件人手机号码')
         return false
       } else {
         if (!(/^1[34578]\d{9}$/.test(this.receiver))) {
-          this.pop('手机号码填写不规范')
+          this.$refs.pop.selfPOP('手机号码填写不规范')
           return false
         }
       }
@@ -153,7 +141,7 @@ export default {
       let user = this.getUser.name
       let detailaddress = this.placeholders.province + this.placeholders.city/* +this.placeholders.area */+ ' ' + this.detailaddress
       this.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=0&receiver=${this.receiver}&name=${this.name}&addre=${detailaddress}`).then((res) => {
-        res.data.protocol41 ? this.pop('添加成功') : this.pop('添加错误，请重试')
+        res.data.protocol41 ? this.$refs.pop.selfPOP('添加成功') : this.$refs.pop.selfPOP('添加错误，请重试')
         getAddress(this)
         // 添加进入当前数组或者直接刷新
       }).catch((res) => {
@@ -164,14 +152,14 @@ export default {
       let user = this.getUser.name
       this.$http.get(`http://47.94.107.160:8888/address?phonecode=${user}&type=1&id=${x}`).then((res) => {
         if (res.data.protocol41) {
-          this.pop('删除成功')
+          this.$refs.pop.selfPOP('删除成功')
           this.address.forEach(function (val, index) {
             if (val.id == x) {
               this.splice(index, 1)
             }
           }.bind(this.address))
         } else {
-          this.pop('服务器错误，请重试')
+          this.$refs.pop.selfPOP('服务器错误，请重试')
         }
       }).catch((res) => {
         console.log(res)

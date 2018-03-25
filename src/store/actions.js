@@ -8,9 +8,9 @@ export default({
     commit(types.SHOW_LOADING)
   },
   hideLoading: ({commit, state}) => {
-    setTimeout(() => {
+    setTimeout(function () {
       commit(types.HIDE_LOADING)
-    }, 500)
+    }, 600)
   },
   addcarts: ({commit, state}, val) => {
     commit(types.ADD_CARTS, val)

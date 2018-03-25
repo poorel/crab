@@ -1,19 +1,28 @@
 <template>
-  <div id="popup">
+  <transition enter-active-class="animated fadeInUp"
+              leave-active-class="animated fadeOutDown">
+  <div id="popup" v-show="view">
     {{popup_content}}
   </div>
+  </transition>
 </template>
 <script>
 export default {
   name: 'popup',
   data () {
     return {
-
+      view: false,
+      popup_content: '传参啊,大哥！'
     }
   },
-  props: ['popup_content'],
   methods: {
-
+    selfPOP: function (popupContent) {
+      this.popup_content = popupContent
+      this.view = true
+      setTimeout(() => {
+        this.view = false
+      }, 1500)
+    }
   },
   mounted () {
 
