@@ -1,0 +1,114 @@
+@charset "UTF-8";
+/*万能清除浮动法（选添加class选择符执行，否则影响范围太大）*/
+/*高和行高，垂直居中*/
+/*浏览器兼容类*/
+/*@keyframes,transition*/
+/*
+@-webkit-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-moz-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-o-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@-ms-keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}
+@keyframes fadeIn {
+  0% { opacity: 0; } 100% { opacity: 0; }
+}*/
+#selectBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999; }
+  #selectBox .selectBox_bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /*background-color: #FFFFFF;*/
+    background-color: #000;
+    opacity: 0.3;
+    z-index: 99999; }
+  #selectBox .box_content {
+    position: absolute;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    min-width: 360px;
+    z-index: 9999999999999; }
+    #selectBox .box_content .box_header {
+      overflow: hidden;
+      height: 40px;
+      border-bottom: 1px solid #e2e2e2;
+      background: white;
+      width: 100%; }
+      #selectBox .box_content .box_header h2 {
+        width: 220px;
+        height: 100%;
+        float: left;
+        /*h-shadow v-shadow blur spread color inset;*/
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        font-size: 16px;
+        color: #424242;
+        line-height: 40px;
+        padding-left: 20px; }
+      #selectBox .box_content .box_header span {
+        width: 40px;
+        height: 100%;
+        float: right;
+        line-height: 40px;
+        font-size: 14px;
+        color: #ff6633; }
+    #selectBox .box_content .box_message {
+      width: 100%;
+      display: flex;
+      /*Flex布局*/
+      display: -webkit-flex;
+      /* Safari */
+      align-items: center;
+      /*指定垂直居中*/
+      justify-content: center;
+      padding: 10px 0px;
+      min-height: 50px;
+      background: white; }
+    #selectBox .box_content .select_footer {
+      width: 100%;
+      display: flex;
+      /*Flex布局*/
+      display: -webkit-flex;
+      /* Safari */
+      align-items: center;
+      /*指定垂直居中*/
+      justify-content: space-around;
+      min-height: 40px;
+      background: white;
+      padding: 5px 0px; }
+      #selectBox .box_content .select_footer button {
+        padding: 5px 15px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        font-size: 14px;
+        color: #fff;
+        letter-spacing: 3px;
+        text-indent: 3px; }
+      #selectBox .box_content .select_footer button:first-child {
+        background: #ff6633; }
+      #selectBox .box_content .select_footer button:last-child {
+        background: #ccc; }
+
+/*# sourceMappingURL=selectBox.css.map */

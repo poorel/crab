@@ -34,7 +34,7 @@
   @if $left {
     float: $left;
   }
-}
+};
 
 @mixin div($width:auto,$height:100%,$block:false){
   width: $width;

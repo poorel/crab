@@ -26,8 +26,7 @@ export default {
   props: {
     love: {
       type: String,
-      default: '努力工作，热爱生活',
-      required: true
+      default: '努力工作，热爱生活'
     }
   }
 }

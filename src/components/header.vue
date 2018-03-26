@@ -27,18 +27,31 @@
       <span class="col-red">{{getUser.commodity ? getUser.commodity.length : null}}</span>
       </router-link>
     </div>
+    <select-box :title="selectBoxData.title" :visible.sync="selectBoxData.visible">
+      <p>过去就让它过去，来不及从头喜欢你</p>
+      <div class="select_footer" slot="footer">
+        <button type="button" @click="makesure">确认</button>
+        <button type="button" @click="selectBoxData.visible = false">取消</button>
+      </div>
+    </select-box>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex'
+import selectBox from '../components/tool/selectBox.vue'
 export default {
   name: 'crab_head',
   data () {
     return {
       test: '测试数据',
       swing: false,
-      animating: 0
+      animating: 0,
+      selectBoxData: {
+        title: 'bachelordom',
+        visible: true,
+        cb: 'skipLogin'// ['skipLogin','otherCb']
+      }
     }
   },
   methods: {
@@ -77,6 +90,14 @@ export default {
       }
 
       /* 只为体验一下async */
+    },
+    makesure () {
+      // 触发弹窗事件时，修改cb参数，可以切换执行回调
+      this[this.selectBoxData.cb]()
+      this.selectBoxData.visible = false
+    },
+    skipLogin () {
+      console.log(1)
     }
   },
   computed: {
@@ -109,6 +130,9 @@ export default {
       value = value.toString().replace(reg, '$1****$2')
       return value
     }
+  },
+  components: {
+    selectBox
   },
   mounted () {
     var result = this.test

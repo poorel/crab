@@ -141,7 +141,7 @@ export default {
       }
     },
     addOrder () {
-      if (this.allprice & this.address) {
+      if (this.allprice && this.address.length) {
         let user = this.$router.history.current.query.user
         let addressid = this.address[this.addselect].id
         let commodityPool = this.checkoutlist.filter(function (val) {
@@ -162,6 +162,7 @@ export default {
       } else if (!this.allprice) {
         this.$refs.pop.selfPOP('请勾选您想要结算的商品')
       } else {
+        console.log(this.address)
         this.$refs.pop.selfPOP('您还未添加收件地址，请前往个人中心管理')
       }
     }

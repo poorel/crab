@@ -1,6 +1,6 @@
 <template>
   <transition enter-active-class="animated fadeInUp"
-              leave-active-class="animated fadeOutDown">
+              leave-active-class="animated fadeOutDown" :duration="1000">
   <div id="popup" v-show="view">
     {{popup_content}}
   </div>
@@ -17,11 +17,23 @@ export default {
   },
   methods: {
     selfPOP: function (popupContent) {
-      this.popup_content = popupContent
-      this.view = true
-      setTimeout(() => {
-        this.view = false
-      }, 1500)
+      let message = arguments /* arguments为传入的参数数组 */
+      let that = this
+      let pop = function (val) {
+        return new Promise(function (resolve) {
+          that.popup_content = val
+          that.view = true
+          setTimeout(() => { that.view = false }, 1500) // resolve()
+          setTimeout(() => { resolve() }, 2500)
+        })
+      }
+
+      async function continuousPOP () {
+        for (let val of message) {
+          await pop(val) // 返回值为resolve中的值
+        }
+      }
+      continuousPOP()
     }
   },
   mounted () {

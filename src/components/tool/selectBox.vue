@@ -1,12 +1,12 @@
 <template>
-<transition enter-active-class="animated fadeInUp"
-            leave-active-class="animated fadeOutDown">
+<transition enter-active-class="animated zoomIn"
+            leave-active-class="animated zoomOut" :duration="500">
   <div id="selectBox" v-show="visible">
-    <div class="bg"></div>
+    <div class="selectBox_bg"></div>
     <div class="box_content" :style="{width: width}">
       <div class="box_header">
         <h2>{{title}}</h2>
-        <span class="iconfont icon-closePop" v-show="closeVisible" @click="close"></span>
+        <span class="iconfont icon-guanbi1" v-show="closeVisible" @click="close"></span>
       </div>
       <div class="box_message">
         <slot></slot>
@@ -28,7 +28,7 @@ export default {
   props: {
     width: {
       type: String,
-      default: '260px'
+      default: '360px'
     },
     title: {
       type: String,
@@ -51,10 +51,12 @@ export default {
   methods: {
     close () {
       this.$emit('update:visible', false)
+      // 不sync 没有用console.log(this.visible)
     }
   }
 }
 </script>
 
 <style type="text/css" scoped>
+  @import "../../assets/css/selectBox.css";
 </style>

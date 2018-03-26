@@ -1,0 +1,82 @@
+@import "var";
+#selectBox{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999;
+  .selectBox_bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /*background-color: #FFFFFF;*/
+    background-color: #000;
+    opacity: 0.3;
+    z-index: 99999;
+  }
+  .box_content{
+    position: absolute;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+    // transform: translate(-50%, -50%);
+    min-width: 360px;
+    z-index: 9999999999999;
+    .box_header{
+      overflow: hidden;
+      height: 40px;
+      border-bottom: 1px solid #e2e2e2;
+      background: white;
+      width: 100%;
+      h2{
+        @include li(220px,100%,left);
+        @include box-sizing();
+        @include ft(16px,#424242);
+        line-height: 40px;
+        padding-left: 20px;
+      }
+      span{
+        @include li(40px,100%,right);
+        line-height: 40px;
+        @include ft(14px,#ff6633)
+      }
+    }
+    .box_message{
+      width: 100%;
+      display:flex;/*Flex布局*/
+      display: -webkit-flex; /* Safari */
+      align-items:center;/*指定垂直居中*/
+      justify-content:center;
+      padding: 10px 0px;
+      min-height: 50px;
+      background: white;
+    }
+    .select_footer{
+      width: 100%;
+      display:flex;/*Flex布局*/
+      display: -webkit-flex; /* Safari */
+      align-items:center;/*指定垂直居中*/
+      justify-content:space-around;
+      min-height: 40px;
+      background: white;
+      padding: 5px 0px;
+      button{
+        padding: 5px 15px;
+        @include border-radius(3px);
+        @include ft(14px,#fff);
+        @include letter-spacing(3px)
+      }
+      button:first-child{
+        background: #ff6633;
+      }
+      button:last-child{
+        background: #ccc;
+      }
+    }
+  }
+}
+

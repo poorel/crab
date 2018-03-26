@@ -4,7 +4,7 @@
     <header-one v-show='header_show != false'></header-one>
     <!--内容一致，<keep-alive>就无需加载-->
     <router-view @header_if="change1" :key="key"></router-view>
-    <footer-bottom love="爱你就像爱生命!">
+    <footer-bottom>
       <p slot="test" slot-scope="{ address }">
         <span class="iconfont icon-dizhi"></span>
         <span>{{ address }}</span>
