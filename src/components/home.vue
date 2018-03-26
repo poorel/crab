@@ -2,7 +2,7 @@
   <div id="home">
     <div class="bg">
       <div class="w">
-        <p class="bounceInLeft animated">I'll be back!<br/><br/></p>
+        <p class="bounceInLeft animated">独立之精神，自由之思想<br/><br/></p>
       </div>
     </div>
     <div class="taocan w">
@@ -62,16 +62,28 @@
         </li>
       </ul>
     </div>
+    <select-box :title="selectBoxData.title" :visible="selectBoxData.visible">
+      <p>加油吧</p>
+      <div class="select_footer" slot="footer">
+        <button type="button">确认</button>
+        <button type="button">取消</button>
+      </div>
+    </select-box>
   </div>
 </template>
 
 <script>
-import {startMove} from '../assets/js/move'
+import {startMove} from 'jsPath/move'
+import selectBox from '../components/tool/selectBox.vue'
 export default {
   name: 'home',
   data () {
     return {
-      taocan_arr: []
+      taocan_arr: [],
+      selectBoxData: {
+        title: '加油!',
+        visible: true
+      }
     }
   },
   methods: {
@@ -87,7 +99,7 @@ export default {
     }
   },
   components: {
-
+    selectBox
   },
   mounted () {
     this.$http.get('http://47.94.107.160:8888/mysql?tablename=taocan').then((res) => {

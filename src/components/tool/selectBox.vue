@@ -1,11 +1,60 @@
 <template>
-  <div id="selectBox">
+<transition enter-active-class="animated fadeInUp"
+            leave-active-class="animated fadeOutDown">
+  <div id="selectBox" v-show="visible">
     <div class="bg"></div>
-    <div class="box_content">
+    <div class="box_content" :style="{width: width}">
       <div class="box_header">
         <h2>{{title}}</h2>
-        <span class="iconfont"></span>
+        <span class="iconfont icon-closePop" v-show="closeVisible" @click="close"></span>
       </div>
+      <div class="box_message">
+        <slot></slot>
+      </div>
+      <slot name="footer">
+        <!--<div class="box_footer" solt="footer">
+          <button type="button" class="make_sure">确认</button>
+          <button type="button" class="cancel">取消</button>
+        </div>-->
+      </slot>
     </div>
   </div>
+</transition>
 </template>
+
+<script type="text/javascript">
+export default {
+  name: 'selectBox',
+  props: {
+    width: {
+      type: String,
+      default: '260px'
+    },
+    title: {
+      type: String,
+      default: '信息'
+    },
+    visible: {
+      type: Boolean,
+      default: false
+    },
+    closeVisible: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+    close () {
+      this.$emit('update:visible', false)
+    }
+  }
+}
+</script>
+
+<style type="text/css" scoped>
+</style>
