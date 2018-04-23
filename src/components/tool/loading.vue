@@ -1,7 +1,7 @@
 <template>
   <div class="all">
-  <div class="spinner">
-  </div>
+    <div class="spinner">
+    </div>
   </div>
 </template>
 <style>
@@ -18,12 +18,10 @@
     z-index: 10000;
     left:50%;
     top:50%;
-    margin-left: -30px;
-    margin-top: -30px;
+    transform: translate(-50%, -50%);
     width: 60px;
     height: 60px;
     background-color: #67CF22;
-
     -webkit-animation: rotateplane 1.2s infinite ease-in-out;
     animation: rotateplane 1.2s infinite ease-in-out;
   }

@@ -62,12 +62,13 @@
         </li>
       </ul>
     </div>
+    <!--<renderD></renderD>-->
   </div>
 </template>
 
 <script>
 import {startMove} from 'jsPath/move'
-// import addmsg from './tool/message'
+// import renderD from './tool/render.vue'
 export default {
   name: 'home',
   data () {
@@ -86,6 +87,9 @@ export default {
       ele.setAttribute('style', 'box-shadow:none;')
       startMove(ele, {'margin-top': 0})
     }
+  },
+  components: {
+    // renderD
   },
   mounted () {
     this.$http.get('http://47.94.107.160:8888/mysql?tablename=taocan').then((res) => {

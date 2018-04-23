@@ -53,6 +53,8 @@ export default {
       this.$emit('update:visible', false)
       // 不sync 没有用console.log(this.visible)
     }
+  },
+  mounted () {
   }
 }
 </script>

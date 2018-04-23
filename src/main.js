@@ -26,7 +26,6 @@ const router = new VueRouter({
 })
 router.beforeEach(function (to, from, next) {
   for (let key in to.query) { // 解密
-    // console.log(to.query[key])
     to.query[key] = getDAes(to.query[key])
   }
   next()
@@ -60,6 +59,7 @@ axios.interceptors.response.use(function (config) {
   store.dispatch('hideLoading')
   return config
 }, function (error) {
+  store.dispatch('hideLoading')
   return error
 })
 

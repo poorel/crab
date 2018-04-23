@@ -53,6 +53,11 @@ export default {
           if (this.getUser) {
             this.full(JSON.parse(window.localStorage.getItem(res.data)))// 读取本地数据并填充至状态仓库
           }
+        } else {
+          let fullPath = this.$router.history.current.fullPath
+          if (fullPath.indexOf('/checkout') != -1 || fullPath.indexOf('/personcenter') != -1) {
+            this.$router.push({path: '/home'})
+          }
         }
       }).catch((res) => {
         console.log('恢复客户信息失败')
@@ -60,7 +65,6 @@ export default {
       // 获取登陆信息，暂时不进行数据库存储。
     }
   },
-
   beforeDestroy () {
     // alert(1);
   }

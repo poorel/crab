@@ -44,7 +44,6 @@ export default {
   name: 'crab_head',
   data () {
     return {
-      test: '测试数据',
       swing: false,
       animating: 0,
       selectBoxData: {
@@ -59,10 +58,8 @@ export default {
     logout () {
       var user = this.getUser.name
       this.$http.get('http://47.94.107.160:8888/login?logout=1&phonecode=' + user).then((res) => {
-        if (res.data === '注销成功') {
-          this.$router.go(0)
-          this.$router.push({path: '/home'})
-        }
+        this.$router.go(0)
+        this.$router.push({path: '/home'})
       }).catch((res) => {
         console.log(res)
       })
@@ -135,8 +132,6 @@ export default {
     selectBox
   },
   mounted () {
-    var result = this.test
-    this.$emit('test1', result)
   }
 }
 </script>

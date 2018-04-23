@@ -17,17 +17,17 @@
           </div>
           <div class="password1">
             <span class="iconfont icon-mima"></span>
-            <input type="password" placeholder="请输入密码" v-model="pwd">
+            <input type="password" placeholder="请输入密码" v-model="pwd" @keyup.13="login">
           </div>
           <div class="password2">
             <div>
               <span class="iconfont icon-mima"></span>
-              <input type="text" placeholder="请输入密码">
+              <input type="text" placeholder="请输入密码" @keyup.13="login">
             </div>
             <button type="button">获取验证码</button>
           </div>
           <a href="#" target="_blank" class="forget">忘记密码?</a>
-          <button type="button" class="denglu" v-on:click="login">登录</button>
+          <button type="button" class="denglu" @click="login">登录</button>
           <button type="button" class="register">还不是会员? <router-link to="/register"><a href="#">立即注册</a></router-link></button>
         </form>
 
@@ -38,7 +38,7 @@
 </template>
 <script>
 import {mapActions, mapGetters} from 'vuex'
-var login = {
+export default {
   name: 'login_content',
   data () {
     return {
@@ -76,7 +76,6 @@ var login = {
           } else {
             window.localStorage.setItem(phoneCode, [])
           }
-
           this.$router.push({path: '/home'})
         } else {
           this.$refs.pop.selfPOP('账号或密码错误')
@@ -115,18 +114,8 @@ var login = {
     // 触发头部显影
     var result = this.header_show
     this.$emit('header_if', result)
-    // enter事件
-    document.onkeyup = (e) => {
-      if (window.event) { e = window.event }// 如果window.event对象存在，就以此事件对象为准
-      var code = e.charCode || e.keyCode
-      if (code == 13) {
-        this.login()
-      }
-    }
   }
 }
-
-export default login
 </script>
 <style>
   @import "../assets/css/login.css";

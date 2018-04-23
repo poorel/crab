@@ -1,5 +1,3 @@
-/* import home from './components/home.vue'
-import checkout from './components/checkout.vue' */
 // const Foo = r => require.ensure([], () => r(require('./Foo.vue')), 'group-foo')
 import home from './components/home.vue' // resolve => require(['./components/home.vue'], resolve)
 const checkout = r => require.ensure([], () => r(require('./components/checkout.vue')), 'group-router')

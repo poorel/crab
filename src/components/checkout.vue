@@ -18,7 +18,7 @@
     </div>
     <div class="commodity_list">
       <ul>
-        <li v-for="(val,index) in checkoutlist">
+        <li v-for="(val, index) in checkoutlist">
           <span :class="{'iconfont' :true,'icon-dui': val.check}" v-on:click="checkToggle(index)"></span><!--正方边框-->
           <router-link :to="{path:'/single',query:{'singleid': val.id}}"><!--表单+id-->
             <img :src=val.pic>

@@ -1,61 +1,454 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><!--pc站独有-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0,user-scalable=0"><!--手机站独有-->
-  <title>sch</title>
-  <meta name="description" content="breaking open a way through brambles and thorns">
-  <meta name="keywords" content="make great efforts">
-  <meta name="renderer" content="webkit">
-  <meta name="apple-mobile-web-app-capable" content="yes"><!--删除苹果默认工具栏-->
-  <meta name="apple-mobile-web-app-status-bar-style" content="black"><!--设置顶部导航栏颜色-->
-  <!--<link type="text/css" href="../css/font/iconfont.css" rel="stylesheet">-->
+  <title>演示Vue</title>
   <style>
-    body,html{
-      height: 6666px;
+    .container{
+      width:1000px;height:400px;border:1px solid red;       /*flex布局*/
     }
-    * {
-      margin: 0;
-      padding: 0;
-      font-family: 微软雅黑;
+    .left{
+      width:200px; height:100%;background:gray;
+      float: left;
     }
-    #parent{
-      width: 200px;
-      height: 200px;
-      border: 1px solid red;
-      padding-left: 100px;
-      margin: 1220px 0px 0px 20px;
+    .right{
+      height:100%;background:green;overflow: hidden;
+      /* flex布局*/
     }
-    #child {
-      width: 40px;
-      height: 40px;
-      margin:  60px;
-      border: 1px solid green;
+    .nine{            position:fixed;            display:block;            top:0;            right:0;            bottom:0;            left:0;            text-align:center;            background:rgba(0,0,0,.5);}.nine:before{            content:'';            display:inline-block;            vertical-align:middle;            height:100%;}.nine .content{            display:inline-block;            vertical-align:middle;            width:60px;            height:60px;            line-height:60px;            color:red;            background:yellow;}
+    .other{
+      width: 99px;
+      height: 99px;
+      background: black;
     }
   </style>
 </head>
 <body>
-<div id="parent">
-  <div id="child"></div>
+<div id="container">
+  <tb-heading :level="2">
+    <p>我23</p><span>你56</span>
+    <i slot="child">heihehi</i>
+  </tb-heading>
+  <test-model v-on:input="con"></test-model>
+  <test-slot text="999">
+    <template scope="props">
+
+    </template>
+  </test-slot>
 </div>
-
+<div class= "container" style="position: relative">
+  <div class="left"></div>
+  <div class="right"></div>
+</div>
+<div class="nine" id="father">
+  <!--<div class="other"></div>-->
+  <div class="content" id="son"></div>
+</div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script>
-  var child = document.querySelector('#child')
-  console.log(child)
-  console.log(child.getBoundingClientRect())
-  console.log(child.getClientRects())
-  console.log(child.offsetParent)
-  console.log(child.offsetLeft)
-  window.onscroll = function () {
-    console.log(document.body['scrollTop'])
-    console.log(document.documentElement['scrollTop'])
-    console.log(document.body.scrollTop )
-    console.log(document.documentElement.scrollTop)
+  var getChildrenTextContent = function(children) {
+    console.log(children)
+    return children.map(function(node) {
+      return node.children ? getChildrenTextContent(node.children) : node.text
+    }).join('')
+  };
+  Vue.component('tb-heading', {
+    render: function(createElement) {
+      var headingId = getChildrenTextContent(this.$slots.default)
+        .toLowerCase()
+        .replace(/\W+/g, '-')
+        .replace(/(^\-|\-$)/g, '')
+      console.log(headingId)
+      return createElement(
+        'h' + this.level,
+        [this.$slots.default,
+          createElement('a', {
+            attrs: {
+              name: headingId,
+              href: '#' + headingId
+            },
+            style: {
+              color: 'red',
+              fontSize: '20px'
+            },
+            'class': {
+              foo: true,
+              bar: false
+            },
+            // DOM属性
+            domProps: {
+              innerHTML: 'baz' //覆盖插槽
+            },
+            // 组件props
+            props: {
+              myProp: 'bar'
+            },
+            // 事件监听基于 'on'
+            // 所以不再支持如 'v-on:keyup.enter' 修饰语
+            // 需要手动匹配 KeyCode
+            on: {
+              click: function(event) {
+                event.preventDefault();
+                console.log(111);
+              }
+            }
+          }, this.$slots.child)
+        ]
+      )
+    },
+    props: {
+      level: {
+        type: Number,
+        required: true
+      }
+    }
+  });
+  Vue.component('test-model',{
+    props:{
+      value: {
+        default: ''
+      }
+    },
+    render: function (createElement) {
+      let self = this
+      return createElement('input',{
+        attrs: { // 节点属性
+          placeholder: "搜索你想要的车辆",
+          type: 'text'
+        },
+        domProps: {
+          value: self.value
+        },
+        on: {
+          input: function (e) {
+            self.$emit('input', e.target.value)
+            // console.log(self.value)
+          }
+        }
+      })
+    }
+  })
+  Vue.component('test-slot',{
+    props:{
+      text: {
+        default: '99999'
+      }
+    },
+    render: function (createElement) {
+      return createElement('div',{style: {
+        color: 'yellow',
+        height: '20px'
+      }}, [
+        createElement('child', {
+          // pass `scopedSlots` in the data object
+          // in the form of { name: props => VNode | Array<VNode> }
+          scopedSlots: {
+            default: function (props) {
+              return createElement('span', '123456'/*props.text*/)
+            }
+          },
+          domProps: {
+            nodeValue: 'baz' //覆盖插槽
+          },
+          style: {
+            color: 'yellow',
+            height: '20px',
+            display: 'block'
+          }
+        })
+      ])
+    }
+  })
+  new Vue({
+    el: '#container',
+    methods:{
+      con: function (x) {
+        console.log(x)
+      }
+    }
+  });
+  let reg = /\{\{(.*)\}\}/
+  var str = "{{trxt}}"
+  if(reg.test(str))
+  {
+    var a = RegExp.$1
+    console.log(RegExp)
+    console.log(a)
   }
-  window.scrollTo(0, 0)
 
+  var o ={2:42,3:52,4:63,length:3}
+  console.log(new Date());
+</script>
+<script>
+  var arr = [1, [[2, 3], {a:[1,2]}], [5, 6]];
+  var narr = []
+  var flat = function (a) {
+    var type = Object.prototype.toString.call(a).slice(8,-1)
+    console.log(type)
+       if(type === 'Array'){
+         for (let val of a){
+           flat(val)
+         }
+       }else {
+         narr.push(a)
+       }
+  };
+  flat(arr)
+  console.log(narr)
+  var ab;
+  let obj11 = [{a: 1,b: 2}, '22',ab,4]
+  console.log(JSON.parse(JSON.stringify(obj11)));
+  function clone(obj) {
+    var copy;
+
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || "object" != typeof obj) return obj;
+
+    // Handle Date
+    if (obj instanceof Date) {
+      copy = new Date();
+      copy.setTime(obj.getTime());
+      return copy;
+    }
+
+    // Handle Array
+    if (obj instanceof Array) {
+      copy = [];
+      for (var i = 0, len = obj.length; i < len; i++) {
+        copy[i] = clone(obj[i]);
+      }
+      return copy;
+    }
+
+    // Handle Object
+    if (obj instanceof Object) {
+      copy = {};
+      for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+      }
+      return copy;
+    }
+
+    throw new Error("Unable to copy obj! Its type isn't supported.");
+  }
+  var ac = clone(obj11)
+  console.log(ac)
+  obj11[3] = 5
+  console.log(ac)
+  console.log(typeof obj11)
+  console.log(typeof clone)
+  console.log(Object.prototype.toString.call(obj11).slice(8,-1))
+  var c1 = 299
+  var c2 = 299
+  let arrrrrr = [1,2,3,4,5,3,2,299,5,c1,c2]
+
+  let arcc = Array.from(new Set(arrrrrr))
+  console.log(arcc)
+</script>
+<script>
+  function father () {
+    this.a = [1];
+    this.b = 990;
+  }
+  father.prototype.toString = function () {
+    console.log(this.b)
+  }
+  father.prototype.c = [1]
+  let father1 = new father()
+  function son () {
+    father.call(this)
+  }
+  var pro = JSON.parse(JSON.stringify(father.prototype))
+  son.prototype = pro
+  son.prototype.constructor = son
+  let son1 = new son()
+  console.log(son1)
+  son1.a.push(2)
+  son1.b = 888
+  console.log(son1.a)
+  son1.toString()
+  let father2 = new father()
+  console.log(father1.a)
+  console.log(father2.a)
+  let son2 = new son()
+  console.log(son2.a)
+  console.log(son2.b)
+  father1.c.push(99998)
+  console.log(son2)
+  father1.a.push(98989898)
+  console.log(father1)
+  console.log(father2)
+
+  var CreateDiv = function (html) {
+    this.html = html;
+    this.init();
+  };
+
+  CreateDiv.prototype.init = function () {
+    var div = document.createElement('div');
+    div.innerHTML = this.html;
+    document.body.appendChild(div);
+  };
+
+  var ProxySingletonCreateDiv = (function () {
+    var instance;
+    return function (html) {
+      if (!instance) {
+        instance = new CreateDiv(html);
+      }
+      return instance;
+    }
+  })();
+
+  var a = new ProxySingletonCreateDiv('sven1');
+  var b = new ProxySingletonCreateDiv('sven2');
+
+  console.log(b);
+  console.log(a);
+  console.log(a === b); //true
+</script>
+<script>
+  var Event = (function(){
+    var list = {},
+      listen,
+      trigger,
+      remove;
+    listen = function(key,fn){ //监听事件函数
+      if(!list[key]){
+        list[key] = []; //如果事件列表中还没有key值命名空间，创建
+      }
+      list[key].push(fn); //将回调函数推入对象的“键”对应的“值”回调数组
+    };
+    trigger = function(){ //触发事件函数
+      var key = Array.prototype.shift.call(arguments); //第一个参数指定“键”
+      msg = list[key];
+      if(!msg || msg.length === 0){
+        return false; //如果回调数组不存在或为空则返回false
+      }
+      for(var i = 0; i < msg.length; i++){
+        console.log(arguments)
+        msg[i].apply(this, arguments); //循环回调数组执行回调函数
+      }
+    };
+    remove = function(key, fn){ //移除事件函数
+      var msg = list[key];
+      if(!msg){
+        return false; //事件不存在直接返回false
+      }
+      if(!fn){
+        delete list[key]; //如果没有后续参数，则删除整个回调数组
+      }else{
+        for(var i = 0; i < msg.length; i++){
+          if(fn === msg[i]){
+            msg.splice(i, 1); //删除特定回调数组中的回调函数
+          }
+        }
+      }
+    };
+    return {
+      listen: listen,
+      trigger: trigger,
+      remove: remove
+    }
+  })();
+  var fn = function(data){
+    console.log(data + '的推送消息：xxxxxx......');
+  }
+  Event.listen('某公众号', fn);
+  Event.trigger('某公众号', '2016.11.26');
+  Event.remove('某公众号', fn);
+
+  class MyClass {
+    constructor(prop) {
+      this.prop = prop
+    }
+    get prop() {
+
+      return 'getter';
+    }
+    set prop(value) {
+      console.log('setter: '+value);
+    }
+  }
+
+  let inst = new MyClass();
+
+  inst.prop = 123;
+  // setter: 123
+
+  console.log(inst.prop)
+  // 'getter'
+</script>
+<script>
+  // 定义自行车的构造函数
+  var BicycleShop = function(name){
+    this.name = name;
+    this.method = function(){
+      return this.name;
+    }
+  };
+  BicycleShop.prototype = {
+    constructor: BicycleShop,
+    sellBicycle: function(model){
+      var bicycle = this.createBicycle(model);
+      // 执行A业务逻辑
+      bicycle.A();
+
+      // 执行B业务逻辑
+      bicycle.B();
+
+      return bicycle;
+    },
+    createBicycle: function(model){
+      throw new Error("父类是抽象类不能直接调用，需要子类重写该方法");
+    }
+  };
+  // 实现原型继承
+  function extend(Sub,Sup) {
+    var F = function(){};
+    F.prototype = Sup.prototype;
+    Sub.prototype = new F();
+    Sub.prototype.constructor = Sub;
+
+    // 在子类中保存超类的原型,避免子类与超类耦合
+    Sub.sup = Sup.prototype;
+
+    if(Sup.prototype.constructor === Object.prototype.constructor) {
+      // 检测超类原型的构造器是否为原型自身
+      Sup.prototype.constructor = Sup;
+    }
+  }
+  var BicycleChild = function(name){
+    this.name = name;
+// 继承构造函数父类中的属性和方法
+    BicycleShop.call(this,name);
+  };
+  // 子类继承父类原型方法
+  extend(BicycleChild,BicycleShop);
+  // BicycleChild 子类重写父类的方法
+  BicycleChild.prototype.createBicycle = function(){
+    var A = function(){
+      console.log("执行A业务操作");
+    };
+    var B = function(){
+      console.log("执行B业务操作");
+    };
+    return {
+      A: A,
+      B: B
+    }
+  }
+  var childClass = new BicycleChild("龙恩");
+  console.log(childClass.sellBicycle("宝马"));
+  console.log(typeof new Date())
+</script>
+
+<script>
+  let fa = document.getElementById('father')
+  let son11 = document.getElementById('son')
+  console.log(fa.offsetTop);console.log(fa.offsetParent);console.log(fa.offsetHeight);
+  console.log(son11.offsetTop);console.log(son11.offsetParent);console.log(son11.offsetHeight);
 </script>
 </html>
